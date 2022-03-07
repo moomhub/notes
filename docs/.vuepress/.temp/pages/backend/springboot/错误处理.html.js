@@ -50,7 +50,7 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1646634914000,
+    "updatedTime": 1646642830000,
     "contributors": [
       {
         "name": "MoomHub",
@@ -60,4 +60,17 @@ export const data = {
     ]
   },
   "filePathRelative": "backend/springboot/错误处理.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

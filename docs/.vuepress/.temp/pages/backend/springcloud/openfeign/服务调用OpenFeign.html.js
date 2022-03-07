@@ -77,14 +77,27 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1646638111000,
+    "updatedTime": 1646642830000,
     "contributors": [
       {
         "name": "MoomHub",
         "email": "2208300539@qq.com",
-        "commits": 2
+        "commits": 1
       }
     ]
   },
   "filePathRelative": "backend/springcloud/openfeign/服务调用OpenFeign.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

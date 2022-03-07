@@ -1,5 +1,5 @@
 export const siteData = {
-  "base": "/Notes",
+  "base": "/Notes/",
   "lang": "en-Zh",
   "title": "青衣水袖",
   "description": "记录学习信息的文档",
@@ -27,4 +27,17 @@ export const siteData = {
     ]
   ],
   "locales": {}
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateSiteData) {
+    __VUE_HMR_RUNTIME__.updateSiteData(siteData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ siteData }) => {
+    __VUE_HMR_RUNTIME__.updateSiteData(siteData)
+  })
 }
