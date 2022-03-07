@@ -5,7 +5,7 @@ import { sidebars,navbar } from "./configs";
 
 
 export default defineUserConfig<DefaultThemeOptions>({
-  base: "/Notes/",
+  base: "/notes/",
   head: [
     ["link", { rel: "icon", href: "/images/icon/favicon.ico" }],
     ["meta", { name: "application-name", content: "MoomHub" }],
