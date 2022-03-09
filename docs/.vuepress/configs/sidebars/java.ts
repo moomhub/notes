@@ -1,121 +1,64 @@
-import type { SidebarConfig } from '@vuepress/theme-default'
+const newApi = [
+  {
+    text: "8-17新特性",
+    collapsible: true,
+    children: ["/java/newApi/8-17新特性API.md"],
+  },
+  {
+    text: "各版本特性预览",
+    collapsible: true,
+    children: [
+      "/java/newApi/Java8新特性.md",
+      "/java/newApi/Java8 新特性-Stream流式编程.md",
+      "/java/newApi/Java8新特性-Optional.md",
+      "/java/newApi/Java8新特性-时间类.md",
+      "/java/newApi/Java9新特性.md",
+      "/java/newApi/Java10新特性.md",
+      "/java/newApi/Java11新特性.md",
+      "/java/newApi/Java12新特性.md",
+      "/java/newApi/Java13新特性.md",
+      "/java/newApi/Java14新特性.md",
+      "/java/newApi/Java15新特性.md",
+      "/java/newApi/Java16新特性.md",
+      "/java/newApi/Java17新特性.md",
+    ],
+  },
+];
 
-export const java: SidebarConfig = {
-  '/java/版本特性': [
-    {
-      text: 'Java8新特性',
-      children: [
-        '/java/版本特性/Java8新特性.md',
-      ],
-    },
-    {
-      text: 'Java9新特性',
-      children: [
-        '/java/版本特性/Java9新特性.md',
-      ],
-    },
-  ],
-  '/advanced/': [
-    {
-      text: 'Advanced',
-      children: [
-        '/advanced/architecture.md',
-        '/advanced/plugin.md',
-        '/advanced/theme.md',
-      ],
-    },
-    {
-      text: 'Cookbook',
-      children: [
-        '/advanced/cookbook/README.md',
-        '/advanced/cookbook/usage-of-client-app-enhance.md',
-        '/advanced/cookbook/adding-extra-pages.md',
-        '/advanced/cookbook/making-a-theme-extendable.md',
-        '/advanced/cookbook/passing-data-to-client-code.md',
-        '/advanced/cookbook/markdown-and-vue-sfc.md',
-      ],
-    },
-  ],
-  '/reference/': [
-    {
-      text: 'VuePress Reference',
-      collapsible: true,
-      children: [
-        '/reference/cli.md',
-        '/reference/config.md',
-        '/reference/frontmatter.md',
-        '/reference/components.md',
-        '/reference/plugin-api.md',
-        '/reference/theme-api.md',
-        '/reference/client-api.md',
-        '/reference/node-api.md',
-      ],
-    },
-    {
-      text: 'Bundlers Reference',
-      collapsible: true,
-      children: ['/reference/bundler/vite.md', '/reference/bundler/webpack.md'],
-    },
-    {
-      text: 'Default Theme Reference',
-      collapsible: true,
-      children: [
-        '/reference/default-theme/config.md',
-        '/reference/default-theme/frontmatter.md',
-        '/reference/default-theme/components.md',
-        '/reference/default-theme/markdown.md',
-        '/reference/default-theme/styles.md',
-        '/reference/default-theme/extending.md',
-      ],
-    },
-    {
-      text: 'Official Plugins Reference',
-      collapsible: true,
-      children: [
-        {
-          text: 'Common Features',
-          children: [
-            '/reference/plugin/back-to-top.md',
-            '/reference/plugin/container.md',
-            '/reference/plugin/external-link-icon.md',
-            '/reference/plugin/google-analytics.md',
-            '/reference/plugin/medium-zoom.md',
-            '/reference/plugin/nprogress.md',
-            '/reference/plugin/register-components.md',
-          ],
-        },
-        {
-          text: 'Content Search',
-          children: [
-            '/reference/plugin/docsearch.md',
-            '/reference/plugin/search.md',
-          ],
-        },
-        {
-          text: 'PWA',
-          children: [
-            '/reference/plugin/pwa.md',
-            '/reference/plugin/pwa-popup.md',
-          ],
-        },
-        {
-          text: 'Syntax Highlighting',
-          children: [
-            '/reference/plugin/prismjs.md',
-            '/reference/plugin/shiki.md',
-          ],
-        },
-        {
-          text: 'Theme Development',
-          children: [
-            '/reference/plugin/active-header-links.md',
-            '/reference/plugin/git.md',
-            '/reference/plugin/palette.md',
-            '/reference/plugin/theme-data.md',
-            '/reference/plugin/toc.md',
-          ],
-        },
-      ],
-    },
-  ],
-}
+const base = [
+  {
+    text: "基础",
+    collapsible: true,
+    children: [
+      "/java/base/Java环境变量配置.md",
+      "/java/base/Java流式编程-Stream.md",
+      "/java/base/Lambda表达式.md",
+      "/java/base/垃圾回收GC.md",
+    ],
+  },
+];
+
+const thread = [
+  {
+    text: "Thread 线程",
+    collapsible: true,
+    children: [
+      "/java/thread/线程基本概念.md",
+      "/java/thread/实现线程的几种方式.md",
+      "/java/thread/线程的生命周期.md",
+      "/java/thread/线程安全.md",
+      "/java/thread/等待唤醒机制.md",
+      "/java/thread/指令重排.md",
+    ],
+  },
+  {
+    text: "多线程: JUC",
+    collapsible: true,
+    children: [
+      "/java/thread/Java线程池.md",
+      "/java/thread/Java并发编程-AQS并发容器同步组件.md",
+    ],
+  },
+];
+
+export { newApi, base, thread };
