@@ -23,8 +23,7 @@ INSERT INTO student VALUES('赵六','语文',90);
 INSERT INTO student VALUES('赵六','英语',90);
 ```
 
-<details>
-    <summary>答案</summary>
+
 
 ```sql
 # A. 使用子查询
@@ -33,8 +32,6 @@ SELECT DISTINCT `name` FROM student WHERE `name` NOT IN (SELECT `name` FROM stud
 # B. 使用分组过滤查询
 SELECT `name` FROM student GROUP BY `name` HAVING MIN(fenshu)>80;
 ```
-
-</details>
 
 
 
@@ -58,8 +55,8 @@ INSERT INTO student VALUES(2,'2005002','李四','0001','数学', 89);
 INSERT INTO student VALUES(3,'2005001','张三','0001','数学', 69);
 ```
 
-<details>
-    <summary>答案</summary>
+
+​    
 
 思路：对编号以外的其他字段进行分组，然后只保留最小的，删除其他的
 
@@ -75,7 +72,7 @@ DELETE FROM student WHERE id NOT IN (SELECT MIN(id) FROM student GROUP BY sid,`n
 DELETE FROM student WHERE id NOT IN (SELECT * FROM (SELECT MIN(id) FROM student GROUP BY sid,`name`,cid,cname,score) temp);
 ```
 
-</details>
+
 
 
 
@@ -93,14 +90,14 @@ CREATE TABLE team(
 INSERT INTO team VALUES('a'),('b'),('c'),('d');
 ```
 
-<details>
-    <summary>答案</summary>
+
+​    
 
 ```sql
 SELECT CONCAT(a.name,b.name) "组合名" FROM team a,team b WHERE a.name<b.name 
 ```
 
-</details>
+
 
 
 
@@ -133,8 +130,8 @@ INSERT INTO temp VALUES(1992,4,2.4);
 | 1991 | 1.1  | 1.2  | 1.3  | 1.4  |
 | 1992 | 2.1  | 2.2  | 2.3  | 2.4  |
 
-<details>
-    <summary>答案</summary>
+
+​    
 
 ```sql
 SELECT 
@@ -149,7 +146,7 @@ GROUP BY
 YEAR
 ```
 
-</details>
+
 
 
 
@@ -180,14 +177,14 @@ INSERT INTO grade VALUES(NULL,'servlet',80);
 | 4        | jsp        | 30    | fail     |
 | 5        | servlet    | 80    | pass     |
 
-<details>
-    <summary>答案</summary>
+
+​    
 
 ```sql
 SELECT g.*,IF(g.score>60,'pass','fail') "考试结果" FROM grade g; 
 ```
 
-</details>
+
 
 
 ​			
