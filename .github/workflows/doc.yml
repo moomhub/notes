@@ -16,7 +16,6 @@ jobs:
         with:
           # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
-          domain: www.moomhub.tk
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -49,6 +48,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
+          domain: www.moomhub.tk
           # 部署到 gh-pages 分支
           target_branch: gh-pages
           # 部署目录为 VuePress 的默认输出目录
