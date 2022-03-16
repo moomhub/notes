@@ -58,7 +58,8 @@ export default defineUserConfig<DefaultThemeOptions>({
     [
       "@vuepress/docsearch",
       {
-        apiKey: "123456",
+        appId: "Q6JY0Z6EVF",
+        apiKey: "8644a38510392fdc7e0aabb51371cebd",
         indexName: "moomhub",
         locales: {
           "/": {
