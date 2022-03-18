@@ -3,11 +3,11 @@ export const database = {
   children: [
     {
       text: "Mysql",
-      link: "/database/mysql/base/数据库和SQL概述.md",
+      link: "/database/mysql/base/数据库和SQL概述.html",
     },
     {
       text: "Percona Xtradb Cluster",
-      link: "/database/pxc/安装Percona数据库.md",
+      link: "/database/pxc/安装Percona数据库.html",
     },
   ],
 };

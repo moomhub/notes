@@ -1,5 +1,4 @@
-import type { SidebarConfigArray } from "@vuepress/theme-default";
-const springboot: SidebarConfigArray = [
+const springboot = [
   {
     text: "Spring Boot基础",
     collapsible: false,
@@ -28,7 +27,7 @@ const springboot: SidebarConfigArray = [
     ],
   },
 ];
-const springcloud: SidebarConfigArray = [
+const springcloud = [
   {
     text: "Gateway 网关服务",
     collapsible: false,
