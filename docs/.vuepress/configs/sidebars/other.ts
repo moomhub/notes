@@ -1,7 +1,7 @@
 const linux = [
   {
     text: "Linux 配置",
-    collapsible: true,
+    collapsible: false,
     children: [
       "/other/linux/Ubuntu设置国内镜像软件源.md",
       "/other/linux/Ubuntu设置远程登陆.md",
@@ -13,7 +13,7 @@ const linux = [
 const docker = [
   {
     text: "Docker 基础",
-    collapsible: true,
+    collapsible: false,
     children: [
       "/other/docker/Docker安装.md",
       "/other/docker/Docker运行设置IP.md",
@@ -22,7 +22,7 @@ const docker = [
   },
   {
     text: "Docker 安装应用",
-    collapsible: true,
+    collapsible: false,
     children: [
       "/other/docker/Docker安装Web管理平台.md",
       "/other/docker/Docker安装Nacos.md",
