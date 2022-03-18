@@ -34,10 +34,11 @@ public class SpringBootAdminApplication {
 }
 ```
 
+做好以上配置，然后访问[http://ip:port；效果如下](http://ip:port；效果如下)
 
-做好以上配置，然后访问[http://ip:port；效果如下](http://ip:port；效果如下)<br /><br />目前还没有客户端注册到服务端，所以看不到任何监控的内容，接下来我们创建一个客户端并且注册到服务端后再来看看效果。
+目前还没有客户端注册到服务端，所以看不到任何监控的内容，接下来我们创建一个客户端并且注册到服务端后再来看看效果。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/395018/1623892146828-42e46f76-47a2-4271-a5c1-d6048c9ab485.png#align=left&display=inline&height=107&margin=%5Bobject%20Object%5D&name=image.png&originHeight=214&originWidth=1183&size=42546&status=done&style=none&width=591.5)
+
 
 ## Client端配置
 
@@ -92,7 +93,7 @@ management:
 
 现在的效果如下：
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1623833694428-12811277-a126-4dcb-8383-ea56a022fcc9.png#align=left&display=inline&height=508&margin=%5Bobject%20Object%5D&originHeight=508&originWidth=1080&size=0&status=done&style=none&width=1080)
+![](https://gitee.com/moomhub/img/raw/master/1623833694428-12811277-a126-4dcb-8383-ea56a022fcc9.png)
 
 spring-boot-admin的应用就简单介绍完了。spring-boot-admin配合spring-boot-actuator实现多服务监控，不仅能查看提供服务监控信息的ui，而且可以监控更加全面的内容。
 

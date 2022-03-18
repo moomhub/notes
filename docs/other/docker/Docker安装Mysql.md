@@ -1,16 +1,16 @@
-# **docker 安装mysql**
+# **Docker 安装mysql**
 
 ## **下载Mysql镜像**
 
 **`命令：`docker pull mysql**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117101907475-1388871070.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101907475-1388871070.png)**
 
 **查看镜像**
 
 **`命令：`docker images**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117101920800-1067185475.png)**
+![image-20220318143914640](https://gitee.com/moomhub/img/raw/master/image-20220318143914640.png)**
 
 **在opt下创建文件夹**
 
@@ -21,7 +21,7 @@ cd mysql_docker/
 echo $PWD
 ```
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117101933202-1072982636.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101933202-1072982636.png)**
 
 **5、启动mysql容器，在var/lib/docker/containers/下查看容器**
 
@@ -37,7 +37,7 @@ docker run --name mysql-slave -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs 
 
 
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117101951542-1388225438.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101951542-1388225438.png)**
 
 **`命令：`cd /var/lib/docker/containers/**
 
@@ -45,7 +45,7 @@ docker run --name mysql-slave -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs 
 
 **`命令：`docker ps -a**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102003235-1426406656.png)**
+![image-20220318143901289](https://gitee.com/moomhub/img/raw/master/image-20220318143901289.png)**
 
 **7、进入mysql容器，并登陆mysql**
 
@@ -57,7 +57,7 @@ docker exec -it mysql-master bash
 
 **命令：`mysql -uroot -p**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102011980-2122252374.png)**
+![image-20220318143837718](https://gitee.com/moomhub/img/raw/master/image-20220318143837718.png)**
 
 **8、开启远程访问权限**
 
@@ -66,9 +66,9 @@ docker exec -it mysql-master bash
 **`命令：`ALTER USER 'slave'@'%' IDENTIFIED WITH mysql_native_password BY '123456';**
 **`命令：`flush privileges;**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102022439-1012036839.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102022439-1012036839.png)**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102030619-917697046.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102030619-917697046.png)**
 
 **镜像里面 root用户已经有远程连接权限在里面，所以不需要去设置，只是模式不一样才导致无法连接，把root用户的密码改成 mysql_native_password 模式，即可远程连接**
 
@@ -76,7 +76,7 @@ docker exec -it mysql-master bash
 
 **`命令：`docker logs -f --tail 10 a4dac74d48f7**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102048856-1273275706.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102048856-1273275706.png)**
 
 ## **常用命令**
 
@@ -88,11 +88,11 @@ docker exec -it mysql-master bash
 
 **`命令：`docker stop mysqlserver**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102059917-479100535.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102059917-479100535.png)**
 
 - **重启docker中mysql重启**
 
-**![img](https://img2018.cnblogs.com/blog/997646/202001/997646-20200117102109562-1174307222.png)**
+**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102109562-1174307222.png)**
 
 - **重启docker**
 

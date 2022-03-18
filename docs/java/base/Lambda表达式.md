@@ -1,7 +1,5 @@
 # Lambda表达式简介
 
-
-
 ## 1.Java8 引入函数式编程风格
 
 函数式编程：定义函数作为一等公民，可以赋值给变量作为参数或者返回值进行传递，而Lambda表达式就是Java引入的函数式编程的一次革命性的尝试，突破了只有类作为头等公民的设计，将函数作为参数进行传递，在编程方式上提供了很大的便捷
@@ -195,5 +193,4 @@ LongToIntFunction：int applyAsInt(long value);接受long返回int的一元函�
 		Consumer<String> consumer2 = sb::append;
 	}
 ```
-
 

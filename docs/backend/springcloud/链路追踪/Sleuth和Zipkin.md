@@ -1,19 +1,19 @@
 # Spring Cloud 链路追踪 - Sleuth和 zipkin
 
-
 在微服务框架中，一个由客户端发起的请求在后端系统中会经过多个不同的的服务节点调用来协同产生最后的请求结果，每一个前段请求都会形成一条复杂的分布式服务调用链路，链路中的任何一环出现高延时或错误都会引起整个请求最后的失败.<br />而来sleuth就是用于追踪每个请求的整体链路
+
+## Sleuth
 
 Spring Cloud Sleuth 为 Spring Cloud 实现了分布式跟踪解决方案。兼容 Zipkin，HTrace 和其他基于日志的追踪系统，例如 ELK（Elasticsearch 、Logstash、 Kibana）。
 
 Spring Cloud Sleuth 提供了以下功能：
 
 - `链路追踪`：通过 Sleuth 可以很清楚的看出一个请求都经过了那些服务，可以很方便的理清服务间的调用关系等。
-
 - `性能分析`：通过 Sleuth 可以很方便的看出每个采样请求的耗时，分析哪些服务调用比较耗时，当服务调用的耗时随着请求量的增大而增大时， 可以对服务的扩容提供一定的提醒。
-
 - `数据分析，优化链路`：对于频繁调用一个服务，或并行调用等，可以针对业务做一些优化措施。
-
 - `可视化错误`：对于程序未捕获的异常，可以配合 Zipkin 查看。
+
+## zipkin
 
 [Zipkin](https://zipkin.io/) 是 Twitter 公司开发贡献的一款开源的分布式实时数据追踪系统（Distributed Tracking System），基于 Google Dapper 的论文设计而来，其主要功能是聚集各个异构系统的实时监控数据。
 
@@ -33,20 +33,20 @@ Spring Cloud Sleuth 提供了以下功能：
 
 Zipkin 分为两端，一个是 Zipkin 服务端，一个是 Zipkin 客户端，客户端也就是微服务的应用，客户端会配置服务端的 URL 地址，一旦发生服务间的调用的时候，会被配置在微服务里面的 Sleuth 的监听器监听，并生成相应的 Trace 和 Span 信息发送给服务端。发送的方式有两种，一种是消息总线的方式如 RabbitMQ 发送，还有一种是 HTTP 报文的方式发送。
 
-服务端部署
+### 服务端部署
 
 服务端是一个独立的可执行的 jar 包，官方下载地址：[https://search.maven.org/remote_content?g=io.zipkin&a=zipkin-server&v=LATEST&c=exec](https://search.maven.org/remote_content?g=io.zipkin&a=zipkin-server&v=LATEST&c=exec)，使用 `java -jar zipkin.jar` 命令启动，端口默认为 `9411`。我们下载的 jar 包为：zipkin-server-2.20.1-exec.jar，启动命令如下：
 
 [https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec](https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec)
 
-```纯文本
+```shell
 java -jar zipkin-server-2.20.1-exec.jar
 ```
 
 
 在需要进行链路追踪的项目中（服务网关、商品服务、订单服务）添加 `spring-cloud-starter-zipkin` 依赖。
 
-```纯文本
+```xml
 <!-- spring cloud zipkin 依赖 -->
 <dependency> 
     <groupId>org.springframework.cloud</groupId>
@@ -68,10 +68,9 @@ spring:
       probability: 1.0               # 收集数据百分比，默认 0.1（10%）
 ```
 
+### 术语说明
 
-术语说明
-
-span
+#### span
 
 基本工作单位，一次单独的调用链可以称为一个 Span，Dapper 记录的是 Span 的名称，以及每个 Span 的 ID 和父 ID，以重建在一次追踪过程中不同 Span 之间的关系，图中一个矩形框就是一个 Span，前端从发出请求到收到回复就是一个 Span。
 
@@ -84,7 +83,7 @@ Dapper 记录了 span 名称，以及每个 span 的 ID 和父 span ID，以重�
 
 举个例子：客户端调用服务 A 、服务 B 、服务 C 、服务 F，而每个服务例如 C 就是一个 Span，如果在服务 C 中另起线程调用了 D，那么 D 就是 C 的子 Span，如果在服务 D 中另起线程调用了 E，那么 E 就是 D 的子 Span，这个 C -> D -> E 的链路就是一条 Trace。如果链路追踪系统做好了，链路数据有了，借助前端解析和渲染工具，可以达到下图中的效果：
 
-Annotations
+#### Annotations
 
 用来及时记录一个事件的存在，一些核心 annotations 用来定义一个请求的开始和结束。
 
@@ -100,7 +99,7 @@ Annotations
 
 如果想知道一个接口在哪个环节出现了问题，就必须清楚该接口调用了哪些服务，以及调用的顺序，如果把这些服务串起来，看起来就像链条一样，我们称其为调用链。
 
-想要实现调用链，就要为每次调用做个标识，然后将服务按标识大小排列，可以更清晰地看出调用顺序，我们暂且将该标识命名为 spanid
+想要实现调用链，就要为每次调用做个标识，然后将服务按标识大小排列，可以更清晰地看出调用顺序，我们暂且将该标识命名为spanid
 
 实际场景中，我们需要知道某次请求调用的情况，所以只有 spanid 还不够，得为每次请求做个唯一标识，这样才能根据标识查出本次请求调用的所有服务，而这个标识我们命名为 traceid。
 
@@ -309,5 +308,4 @@ pom 依赖
 
 </configuration>
 ```
-
 

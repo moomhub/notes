@@ -87,7 +87,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'abc123456';
 
 避免直接操作数据文件
 
-![image-20210913114826154](http://cdn.oboom.top/doc/image-20210913114826154.png)
+![image-20210913114826154](https://gitee.com/moomhub/img/raw/master/image-20210913114826154.png)
 
 
 
@@ -121,11 +121,11 @@ AntiSamy是开源的Java类库，可以用来过滤XSS恶意代码
 </dependency>
 ```
 
-![image-20210914165918851](http://cdn.oboom.top/doc/image-20210914165918851.png)
+![image-20210914165918851](https://gitee.com/moomhub/img/raw/master/image-20210914165918851.png)
 
 
 
-![image-20210914165943393](http://cdn.oboom.top/doc/image-20210914165943393.png)
+![image-20210914165943393](https://gitee.com/moomhub/img/raw/master/image-20210914165943393.png)
 
 ### Jsoup（推荐使用）
 

@@ -1,6 +1,6 @@
 # Ubuntu 设置远程登陆
 
-# 检查ssh服务
+## 检查ssh服务
 
 判断是否安装ssh服务，可以通过如下命令进行：
 
@@ -91,7 +91,7 @@ sudo apt-get –purge remove sshd
 
 然后就会提示卸载完成。
 
-# Linux 远程密码模式登陆
+## Linux 远程密码模式登陆
 
 > 在wsl中执行sudo /etc/init.d/ssh start<br />可能会出现sshd: no hostkeys available -- exiting的报错，<br />在 /etc/ssh 路径下执行sudo ssh-keygen -A可以解决。
 
@@ -127,12 +127,12 @@ service ssh restart
 ```
 
 
-# Linux 远程密钥模式登陆
+## Linux 远程密钥模式登陆
 
 > 在Linux 服务器上进行创建密钥时，进行当前用户登陆是已当前用户创建的，进行远程登陆时，可输入当前用户的名称可直接进行登陆。但是输入其他用户时，会爆拒绝访问，同时要求输入密码进行登陆。（当禁止密码进行登陆时就只 允许当前用户进行登陆）
 
 
-## 制作密钥对
+### 制作密钥对
 
 ```纯文本
 首先在服务器上制作密钥对。首先用密码登录到你打算使用密钥登录的账户，然后执行以下命令：
@@ -155,7 +155,7 @@ The key fingerprint is:
 ```
 
 
-## 在服务器上安装公钥
+### 在服务器上安装公钥
 
 ```纯文本
 键入以下命令，在服务器上安装公钥：
@@ -168,7 +168,7 @@ The key fingerprint is:
 ```
 
 
-## 设置 SSH，打开密钥登录功能
+### 设置 SSH，打开密钥登录功能
 
 编辑 /etc/ssh/sshd_config 文件，进行如下设置：
 

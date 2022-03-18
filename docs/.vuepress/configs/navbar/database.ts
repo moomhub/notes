@@ -3,7 +3,7 @@ export const database = {
   children: [
     {
       text: "Mysql",
-      link: "/database/mysql/Mysql核心-视图.md",
+      link: "/database/mysql/base/数据库和SQL概述.md",
     },
     {
       text: "Percona Xtradb Cluster",

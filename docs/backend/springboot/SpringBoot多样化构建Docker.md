@@ -2,15 +2,19 @@
 
 伴随着技术的不断更新，基于 Spring Boot 构建 Docker 镜像的方式也是五花八门，大致分为以下几种：
 
-Idea 构建
+## Idea 构建
 
-Cloud Native Buildpacks（Spring Boot 2.3+ 版本开始支持）<br />Google 的 jib-maven-plugin<br />fabric8 和 spotify 的 docker-maven-plugin
+Cloud Native Buildpacks（Spring Boot 2.3+ ）版本开始支持
 
-# 简单的Spring-Boot-Docker 项目
+Google 的 jib-maven-plugin
+
+fabric8 和 spotify 的 docker-maven-plugin
+
+## 简单的Spring-Boot-Docker 项目
 
 先准备一个简单的基于 Maven 的 Spring Boot 项目，方便实践。
 
-## pom
+### pom
 
 添加 spring-boot-starter-web 依赖。
 
@@ -24,11 +28,11 @@ Cloud Native Buildpacks（Spring Boot 2.3+ 版本开始支持）<br />Google 的
 ```
 
 
-## 配置文件
+### 配置文件
 
 配置文件无需添加任何内容，基于约定优于配置，使用默认配置即可。
 
-## 启动类
+### 启动类
 
 ```java
 @SpringBootApplication
@@ -41,7 +45,7 @@ public class SpringBootDockerApplication {
 ```
 
 
-## 控制层
+### 控制层
 
 ```java
 @RestController
@@ -55,13 +59,13 @@ public class DockerController {
 ```
 
 
-## 启动访问
+### 启动访问
 
 启动项目，浏览器访问：[http://localhost:8080/，页面返回：Hello](http://localhost:8080/，页面返回：Hello) Spring Boot Docker!，说明项目OK，准备工作已完成。
 
-# Idea 本地推送到指定的docker
+## Idea 本地推送到指定的docker
 
-## Dockerfile
+### Dockerfile
 
 ```Docker
 FROM openjdk:8u212-jre
@@ -72,7 +76,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 ```
 
 
-## idae 配置
+### idae 配置
 
 1. 如下图红框所示，创建一个配置：
 
@@ -88,7 +92,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 2. 运行结果如下所示，项目构建成功后，在Docker上部署镜像成功，然后运行容器成功：
 
-# SpringBoot 原生自带的配置
+## SpringBoot 原生自带的配置
 
 使用Spring Boot 2.3.X + 自带的Docker工具进行构建Docker
 
@@ -97,7 +101,7 @@ mvn spring-boot:build-images
 ```
 
 
-## pom文件
+### pom文件
 
 完整配置如下：
 
@@ -160,7 +164,6 @@ mvn spring-boot:build-images
 </build>
 ```
 
-
 ### 阿里云容器配置
 
 ```xml
@@ -216,9 +219,9 @@ mvn spring-boot:build-image -Dmaven.test.skip=true
 ```
 
 
-# jib-maven-plugin
+## jib-maven-plugin
 
-## 简介
+### 简介
 
 Jib 是 Google 开发的可以直接构建 Java 应用程序的 Docker 和 OCI 镜像的类库，以 Maven 和 Gradle 插件形式提供。
 
@@ -235,7 +238,7 @@ Spring Boot 项目添加 jib-maven-plugin 插件。添加相关依赖。
 ```
 
 
-## pom文件
+### pom文件
 
 > Jib 可以快速将 Java 应用程序构建为 Docker 镜像推送至指定远程仓库：<br />DockerHub 官方公共仓库（DockerHub 官方公共仓库国内访问速度堪忧，不推荐）<br />阿里云镜像仓库（需要在阿里云登录账号自行创建仓库）<br />自建私有镜像仓库（本文演示方案）私有镜像仓库搭建请参考：Docker 私有镜像仓库的搭建及认证
 
@@ -245,38 +248,291 @@ Spring Boot 项目添加 jib-maven-plugin 插件。添加相关依赖。
 完整配置如下：
 
 ```xml
-<build>    <plugins>        <plugin>            <groupId>com.google.cloud.tools</groupId>            <artifactId>jib-maven-plugin</artifactId>            <version>2.8.0</version>            <configuration>                <!-- 拉取所需的基础镜像 -->                <from>                    <!-- 默认从官方公共仓库拉取镜像，速度较慢 -->                    <image>openjdk:alpine</image>                    <!-- 从指定仓库拉取镜像提速（需提前将镜像 push 至仓库） -->                    <!--<image>192.168.10.10:5000/openjdk:alpine</image>-->                </from>                <!-- push 到哪个镜像仓库（公共仓库、阿里云仓库、私有自建仓库等） -->                <to>                    <!-- 使用 DockerHub 的官方公共仓库：仓库地址/用户名/镜像名 -->                    <!--<image>registry.hub.docker.com/mrhelloworld/${project.name}</image>-->                    <!-- 使用自建的私有仓库：仓库地址/镜像名 -->                    <image>192.168.10.10:5000/${project.artifactId}</image>                    <!-- 镜像版本号 -->                    <tags>                        <tag>${project.version}</tag>                    </tags>                    <!-- 连接仓库的账号密码 -->                    <auth>                        <username>用户名</username>                        <password>密码</password>                    </auth>                </to>                <!-- 使 jib 插件支持 http 协议连接镜像仓库(安全起见，默认是关闭的) -->                <allowInsecureRegistries>true</allowInsecureRegistries>                <container>                    <!-- 启动类 -->                    <mainClass>org.example.SpringBootDockerApplication</mainClass>                </container>            </configuration>        </plugin>    </plugins></build>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>
+				com.google.cloud.tools
+			</groupId>
+			<artifactId>
+				jib-maven-plugin
+			</artifactId>
+			<version>
+				2.8.0
+			</version>
+			<configuration>
+				<!-- 拉取所需的基础镜像 -->
+				<from>
+					<!-- 默认从官方公共仓库拉取镜像，速度较慢 -->
+					<image>
+						openjdk:alpine
+					</image>
+					<!-- 从指定仓库拉取镜像提速（需提前将镜像 push 至仓库） -->
+					<!-- <image>192.168.10.10:5000/openjdk:alpine</image> -->
+				</from>
+				<!-- push 到哪个镜像仓库（公共仓库、阿里云仓库、私有自建仓库等） -->
+				<to>
+					<!-- 使用 DockerHub 的官方公共仓库：仓库地址/用户名/镜像名 -->
+					<!-- <image>registry.hub.docker.com/mrhelloworld/${project.name}</image> -->
+					<!-- 使用自建的私有仓库：仓库地址/镜像名 -->
+					<image>
+						192.168.10.10:5000/${project.artifactId}
+					</image>
+					<!-- 镜像版本号 -->
+					<tags>
+						<tag>
+							${project.version}
+						</tag>
+					</tags>
+					<!-- 连接仓库的账号密码 -->
+					<auth>
+						<username>
+							用户名
+						</username>
+						<password>
+							密码
+						</password>
+					</auth>
+				</to>
+				<!-- 使 jib 插件支持 http 协议连接镜像仓库(安全起见，默认是关闭的) -->
+				<allowInsecureRegistries>
+					true
+				</allowInsecureRegistries>
+				<container>
+					<!-- 启动类 -->
+					<mainClass>
+						org.example.SpringBootDockerApplication
+					</mainClass>
+				</container>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+
 ```
 
 
 ### 阿里云容器配置
 
 ```xml
-<build>    <plugins>        <plugin>            <groupId>com.google.cloud.tools</groupId>            <artifactId>jib-maven-plugin</artifactId>            <version>2.8.0</version>            <configuration>                <!-- 拉取所需的基础镜像 -->                <from>                    <!-- 默认从官方公共仓库拉取镜像，速度较慢 -->                    <image>openjdk:8u212-jre</image>                    <!-- 从指定仓库拉取镜像提速（需提前将镜像 push 至仓库） -->                    <!--<image>192.168.10.10:5000/openjdk:alpine</image>-->                </from>                <!-- push 到哪个镜像仓库（公共仓库、阿里云仓库、私有自建仓库等） -->                <to>                    <!-- 使用 DockerHub 的官方公共仓库：仓库地址/用户名/镜像名 -->                    <!--<image>registry.hub.docker.com/mrhelloworld/${project.name}</image>-->                    <!-- 使用自建的私有仓库：仓库地址/镜像名 -->                    <image>registry.cn-chengdu.aliyuncs.com/moom/moom-auth</image>                    <!-- 镜像版本号 -->                    <tags>                        <tag>${project.version}</tag>                    </tags>                    <!-- 连接仓库的账号密码 -->                    <auth>                        <username>xxxx</username>                        <password>xxxx</password>                    </auth>                </to>                <!-- 使 jib 插件支持 http 协议连接镜像仓库(安全起见，默认是关闭的) -->                <allowInsecureRegistries>true</allowInsecureRegistries>                <container>                    <!-- 启动类 -->                    <mainClass>org.example.logging.LoggingApplication8080</mainClass>                </container>            </configuration>        </plugin>    </plugins></build>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>
+				com.google.cloud.tools
+			</groupId>
+			<artifactId>
+				jib-maven-plugin
+			</artifactId>
+			<version>
+				2.8.0
+			</version>
+			<configuration>
+				<!-- 拉取所需的基础镜像 -->
+				<from>
+					<!-- 默认从官方公共仓库拉取镜像，速度较慢 -->
+					<image>
+						openjdk:8u212-jre
+					</image>
+					<!-- 从指定仓库拉取镜像提速（需提前将镜像 push 至仓库） -->
+					<!-- <image>192.168.10.10:5000/openjdk:alpine</image> -->
+				</from>
+				<!-- push 到哪个镜像仓库（公共仓库、阿里云仓库、私有自建仓库等） -->
+				<to>
+					<!-- 使用 DockerHub 的官方公共仓库：仓库地址/用户名/镜像名 -->
+					<!-- <image>registry.hub.docker.com/mrhelloworld/${project.name}</image> -->
+					<!-- 使用自建的私有仓库：仓库地址/镜像名 -->
+					<image>
+						registry.cn-chengdu.aliyuncs.com/moom/moom-auth
+					</image>
+					<!-- 镜像版本号 -->
+					<tags>
+						<tag>
+							${project.version}
+						</tag>
+					</tags>
+					<!-- 连接仓库的账号密码 -->
+					<auth>
+						<username>
+							xxxx
+						</username>
+						<password>
+							xxxx
+						</password>
+					</auth>
+				</to>
+				<!-- 使 jib 插件支持 http 协议连接镜像仓库(安全起见，默认是关闭的) -->
+				<allowInsecureRegistries>
+					true
+				</allowInsecureRegistries>
+				<container>
+					<!-- 启动类 -->
+					<mainClass>
+						org.example.logging.LoggingApplication8080
+					</mainClass>
+				</container>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+
 ```
 
 
-# docker-maven-plugin
+## docker-maven-plugin
 
 使用这种方式就需要我们自己维护 Dockerfile 了，这也是之前传统的构建方式，分为两个版本：
 
 fabric8：开源的集成开发平台，为基于 Kubernetes、Docker 和 Jenkins 的微服务提供持续发布<br />spotify：Spotify（声田）一个正版流媒体音乐服务平台内部团队开发的插件
 
-## fabric8
+### fabric8
 
-### pom文件
+#### pom文件
 
 #### 私有仓库配置
 
 ```xml
-<build>    <plugins>        <!-- spring-boot-maven-plugin -->        <plugin>            <groupId>org.springframework.boot</groupId>            <artifactId>spring-boot-maven-plugin</artifactId>        </plugin>        <!-- fabric8 的 docker-maven-plugin -->        <plugin>            <groupId>io.fabric8</groupId>            <artifactId>docker-maven-plugin</artifactId>            <version>0.34.1</version>            <!-- 全局配置 -->            <configuration>                <!-- 配置远程 Docker 守护进程 url -->                <dockerHost>http://192.168.10.10:2375</dockerHost>                <!-- 镜像相关配置，支持多镜像 -->                <images>                    <!-- 单个镜像配置 -->                    <image>                        <!-- 镜像名:版本号 -->                        <name>${project.artifactId}:${project.version}</name>                        <!--                            镜像仓库（公共仓库、阿里云仓库、私有自建仓库）配置，用于推送/拉取镜像                            如果不想推送至镜像仓库则无需配置                        -->                        <registry>192.168.10.10:5000</registry>                        <!-- 镜像 build 相关配置 -->                        <build>                            <!-- 使用 Dockerfile 文件，默认地址是 src/main/docker -->                            <dockerFile>Dockerfile</dockerFile>                            <!-- 或者指定地址例如：从项目根路径开始找 项目名/docker -->                            <!--<dockerFile>${project.basedir}/docker/Dockerfile</dockerFile>-->                            <!--                                配置构建镜像时所需要的资源                                配置项说明：http://maven.fabric8.io/#build  -assembly-descriptor                            -->                            <assembly>                                <descriptorRef>artifact</descriptorRef>                            </assembly>                        </build>                    </image>                </images>                <!-- 认证配置，用于镜像仓库认证 -->                <!--                <authConfig>                    <username>用户名</username>                    <password>密码</password>                </authConfig>                -->            </configuration>        </plugin>    </plugins></build>
+<build>
+	<plugins>
+		<!-- spring-boot-maven-plugin -->
+		<plugin>
+			<groupId>
+				org.springframework.boot
+			</groupId>
+			<artifactId>
+				spring-boot-maven-plugin
+			</artifactId>
+		</plugin>
+		<!-- fabric8 的 docker-maven-plugin -->
+		<plugin>
+			<groupId>
+				io.fabric8
+			</groupId>
+			<artifactId>
+				docker-maven-plugin
+			</artifactId>
+			<version>
+				0.34.1
+			</version>
+			<!-- 全局配置 -->
+			<configuration>
+				<!-- 配置远程 Docker 守护进程 url -->
+				<dockerHost>
+					http://192.168.10.10:2375
+				</dockerHost>
+				<!-- 镜像相关配置，支持多镜像 -->
+				<images>
+					<!-- 单个镜像配置 -->
+					<image>
+						<!-- 镜像名:版本号 -->
+						<name>
+							${project.artifactId}:${project.version}
+						</name>
+						<!-- 镜像仓库（公共仓库、阿里云仓库、私有自建仓库）配置，用于推送/拉取镜像                            如果不想推送至镜像仓库则无需配置 -->
+						<registry>
+							192.168.10.10:5000
+						</registry>
+						<!-- 镜像 build 相关配置 -->
+						<build>
+							<!-- 使用 Dockerfile 文件，默认地址是 src/main/docker -->
+							<dockerFile>
+								Dockerfile
+							</dockerFile>
+							<!-- 或者指定地址例如：从项目根路径开始找 项目名/docker -->
+							<!-- <dockerFile>${project.basedir}/docker/Dockerfile</dockerFile> -->
+							<!-- 配置构建镜像时所需要的资源                                配置项说明：http://maven.fabric8.io/#build  -assembly-descriptor -->
+							<assembly>
+								<descriptorRef>
+									artifact
+								</descriptorRef>
+							</assembly>
+						</build>
+					</image>
+				</images>
+				<!-- 认证配置，用于镜像仓库认证 -->
+				<!-- <authConfig>                    <username>用户名</username>                    <password>密码</password>                </authConfig> -->
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+
 ```
 
 
 #### 阿里云容器配置
 
 ```xml
-<build>    <plugins>        <!-- spring-boot-maven-plugin -->        <plugin>            <groupId>org.springframework.boot</groupId>            <artifactId>spring-boot-maven-plugin</artifactId>        </plugin>        <!-- fabric8 的 docker-maven-plugin -->        <plugin>            <groupId>io.fabric8</groupId>            <artifactId>docker-maven-plugin</artifactId>            <version>0.34.1</version>            <!-- 全局配置 -->            <configuration>                <!-- 配置远程 Docker 守护进程 url -->                <dockerHost>http://192.168.10.10:2375</dockerHost>                <!-- 镜像相关配置，支持多镜像 -->                <images>                    <!-- 单个镜像配置 -->                    <image>                        <!-- 镜像名:版本号 -->                        <name>registry.cn-chengdu.aliyuncs.com/moom/moom-auth:0.0.2</name>                        <!--                            镜像仓库（公共仓库、阿里云仓库、私有自建仓库）配置，用于推送/拉取镜像                            如果不想推送至镜像仓库则无需配置                        -->                        <registry>registry.cn-chengdu.aliyuncs.com</registry>                        <!-- 镜像 build 相关配置 -->                        <build>                            <!-- 使用 Dockerfile 文件，默认地址是 src/main/docker -->                            <dockerFile>Dockerfile</dockerFile>                            <!-- 或者指定地址例如：从项目根路径开始找 项目名/docker -->                            <!--<dockerFile>${project.basedir}/docker/Dockerfile</dockerFile>-->                            <!--                                配置构建镜像时所需要的资源                                配置项说明：http://maven.fabric8.io/#build  -assembly-descriptor                            -->                            <assembly>                                <descriptorRef>artifact</descriptorRef>                            </assembly>                        </build>                    </image>                </images>                <!-- 认证配置，用于镜像仓库认证 -->                                <authConfig>                    <username>xxx</username>                    <password>xxx</password>                </authConfig>                            </configuration>        </plugin>    </plugins></build>
+<build>
+	<plugins>
+		<!-- spring-boot-maven-plugin -->
+		<plugin>
+			<groupId>
+				org.springframework.boot
+			</groupId>
+			<artifactId>
+				spring-boot-maven-plugin
+			</artifactId>
+		</plugin>
+		<!-- fabric8 的 docker-maven-plugin -->
+		<plugin>
+			<groupId>
+				io.fabric8
+			</groupId>
+			<artifactId>
+				docker-maven-plugin
+			</artifactId>
+			<version>
+				0.34.1
+			</version>
+			<!-- 全局配置 -->
+			<configuration>
+				<!-- 配置远程 Docker 守护进程 url -->
+				<dockerHost>
+					http://192.168.10.10:2375
+				</dockerHost>
+				<!-- 镜像相关配置，支持多镜像 -->
+				<images>
+					<!-- 单个镜像配置 -->
+					<image>
+						<!-- 镜像名:版本号 -->
+						<name>
+							registry.cn-chengdu.aliyuncs.com/moom/moom-auth:0.0.2
+						</name>
+						<!-- 镜像仓库（公共仓库、阿里云仓库、私有自建仓库）配置，用于推送/拉取镜像                            如果不想推送至镜像仓库则无需配置 -->
+						<registry>
+							registry.cn-chengdu.aliyuncs.com
+						</registry>
+						<!-- 镜像 build 相关配置 -->
+						<build>
+							<!-- 使用 Dockerfile 文件，默认地址是 src/main/docker -->
+							<dockerFile>
+								Dockerfile
+							</dockerFile>
+							<!-- 或者指定地址例如：从项目根路径开始找 项目名/docker -->
+							<!-- <dockerFile>${project.basedir}/docker/Dockerfile</dockerFile> -->
+							<!-- 配置构建镜像时所需要的资源                                配置项说明：http://maven.fabric8.io/#build  -assembly-descriptor -->
+							<assembly>
+								<descriptorRef>
+									artifact
+								</descriptorRef>
+							</assembly>
+						</build>
+					</image>
+				</images>
+				<!-- 认证配置，用于镜像仓库认证 -->
+				<authConfig>
+					<username>
+						xxx
+					</username>
+					<password>
+						xxx
+					</password>
+				</authConfig>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+
 ```
 
 
@@ -305,7 +561,7 @@ mvn clean package docker:build docker:push -Dmaven.test.skip=true
 ```
 
 
-# 通过私有镜像仓库启动容器
+## 通过私有镜像仓库启动容器
 
 docker run -di --name spring-boot-docker -p 8080:8080 192.168.10.10:5000/spring-boot-docker:1.0-SNAPSHOT<br />浏览器访问：[http://192.168.10.10:8080/](http://192.168.10.10:8080/)，页面返回：Hello Spring Boot Docker!，表示一切 OK。
 

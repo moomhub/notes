@@ -2,7 +2,7 @@
 
 Spring Boot提供了良好的服务监控模块，只需要通过简单的配置便可以完成服务监控和管理。但是服务监控这块内容往往是最容易被忽略的一块内容，今天我们一起来学习一下使用`spring-boot-actuator`进行服务监控。`spring-boot-actuator`提供了监控端点，这些端点直接返回`JSON字符串`，通过这些端点可以查询服务运行状况，为了防止端点直接暴露，一般情况下会使用安全框架，如Spring Security来管理这些端点的安全性。
 
-## 一 常用的端点
+## 一、 常用的端点
 
 > 默认情况下，除了`shutdown`，其他端点都是启动状态。
 
@@ -54,7 +54,7 @@ pom.xml 文件设置
 
 ### 端点开启/关闭
 
-```html
+```yaml
 management:
   endpoint:
    # 开启shutdown端点
@@ -65,7 +65,7 @@ management:
 
 启用/禁用所有端点
 
-```纯文本
+```yaml
 management:
   endpoints:
     enabled-by-default: true
@@ -78,7 +78,7 @@ management:
 
 暴露`http`端点
 
-```html
+```yaml
 management:
   endpoints:
     web:
@@ -89,7 +89,7 @@ management:
 
 暴露`JMX`端点
 
-```html
+```yaml
 management:
   endpoints:
     jmx:
@@ -106,7 +106,7 @@ management:
 
 关闭特定的检查项配置如下，关闭redis检查项：
 
-```纯文本
+```yaml
 management:
   health:
     redis:
@@ -116,7 +116,7 @@ management:
 
 默认情况下health只是简单的展示了`UP`和`DOWN`两种状态，如果想要看详细信息，则需要配置
 
-```纯文本
+```yaml
 management:
   endpoint:
     health:
@@ -134,7 +134,7 @@ management:
 
 例如在配置文件中增加如下内容：
 
-```纯文本
+```yaml
 info:
   person:
     name: Java
@@ -144,7 +144,7 @@ info:
 
 访问`info`端点显示的是去掉info的一个JSON串：
 
-```纯文本
+```yaml
 person:
   name: Java
   age: 18

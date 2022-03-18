@@ -430,11 +430,11 @@ PXC 状态管理
 
 PXC节点状态
 
-![image-20200922155642505](https://i.loli.net/2020/09/22/Fl1VTmzCt7EePHJ.png)
+![image-20200922155642505](https://gitee.com/moomhub/img/raw/master/Fl1VTmzCt7EePHJ.png)
 
 PXC集群状态
 
-![image-20200922155721122](https://i.loli.net/2020/09/22/85Z6MenauvrlJtY.png)
+![image-20200922155721122](https://gitee.com/moomhub/img/raw/master/85Z6MenauvrlJtY.png)
 
 节点与集群的相关信息
 

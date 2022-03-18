@@ -73,5 +73,5 @@ DELETE e,d JOIN t_dept d oN e.deptno = d.deptno AND d.dname= '销售部';
 
 8.0 修改密码方式
 
-![image-20210913175154068](http://cdn.oboom.top/doc/image-20210913175154068.png)
+![image-20210913175154068](https://gitee.com/moomhub/img/raw/master/image-20210913175154068.png)
 

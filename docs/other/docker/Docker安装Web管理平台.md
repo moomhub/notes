@@ -1,9 +1,7 @@
 # Docker 安装Web管理平台
 
-> 
 
-
-# 一、拉取相关镜像
+## 一、拉取相关镜像
 
 ```纯文本
 docker pull rethinkdb
@@ -15,7 +13,7 @@ docker images
 ```
 
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1609727399794-88a9447a-0ac3-4e07-9b63-c133b21d8191.png#align=left&display=inline&height=254&margin=%5Bobject%20Object%5D&originHeight=254&originWidth=873&size=0&status=done&style=none&width=873)
+![](https://gitee.com/moomhub/img/raw/master/1609727399794-88a9447a-0ac3-4e07-9b63-c133b21d8191.png)
 
 将原先脚本修改为中文脚本
 
@@ -56,7 +54,7 @@ sudo vi /etc/hosts
 ```
 
 
-# 二、运行脚本
+## 二、运行脚本
 
 将官方脚本换成修改为中文版的脚本
 
@@ -77,7 +75,7 @@ vim deploy
 ```
 
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1609727399813-68696108-209c-4b5a-a83c-fc410882da7a.png#align=left&display=inline&height=278&margin=%5Bobject%20Object%5D&originHeight=278&originWidth=385&size=0&status=done&style=none&width=385)
+![](https://gitee.com/moomhub/img/raw/master/1609727399813-68696108-209c-4b5a-a83c-fc410882da7a.png)
 
 运行安装脚本
 
@@ -93,24 +91,23 @@ cat deploy | ACTION=remove bash
 ```
 
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1609727399795-4ef875c4-a34d-446a-bad2-9d583cdc7584.png#align=left&display=inline&height=419&margin=%5Bobject%20Object%5D&originHeight=419&originWidth=636&size=0&status=done&style=none&width=636)
+![](https://gitee.com/moomhub/img/raw/master/1609727399795-4ef875c4-a34d-446a-bad2-9d583cdc7584.png)
 
 安装成功 Username: admin Password: shipyard
 
 通过浏览器访问 本机ip:18080
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1609727399755-4ae946e6-36c2-4d99-8f11-59ef8cbb6bf1.png#align=left&display=inline&height=461&margin=%5Bobject%20Object%5D&originHeight=461&originWidth=542&size=0&status=done&style=none&width=542)
+![](https://gitee.com/moomhub/img/raw/master/1609727399755-4ae946e6-36c2-4d99-8f11-59ef8cbb6bf1.png)
 
-![](https://cdn.nlark.com/yuque/0/2021/png/395018/1609727399785-375f27c0-9fd2-44fc-8be8-dbd8d51e4df9.png#align=left&display=inline&height=770&margin=%5Bobject%20Object%5D&originHeight=770&originWidth=1110&size=0&status=done&style=none&width=1110)
+![](https://gitee.com/moomhub/img/raw/master/1609727399785-375f27c0-9fd2-44fc-8be8-dbd8d51e4df9.png)
 
 安装成功
 
-# **2.集群管理** 
+## **三、集群管理** 
 
 增加docker集群节点,只需要在节点服务器运行如下语句即可
 
-```纯文本
+```shell
 curl -sSL https://raw.githubusercontent.com/shipyard/shipyard-project.com/master/site/themes/shipyard/static/deploy | ACTION=n
 ```
-
 

@@ -1,8 +1,8 @@
 # Spring Boot 使用Log4j2 日志框架
 
-# Spring boot 接入Log4j2
+## Spring boot 接入Log4j2
 
-## POM依赖
+### POM依赖
 
 springboot默认是用logback的日志框架的，所以需要排除logback，不然会出现jar依赖冲突的报错。
 
@@ -25,7 +25,7 @@ springboot默认是用logback的日志框架的，所以需要排除logback，�
 ```
 
 
-## Application.yml 添加配置
+### Application.yml 添加配置
 
 > xxx为报名，可以指定包名打印的内容
 
@@ -38,7 +38,7 @@ logging:
 ```
 
 
-## 新增Log4j2.xml 日志配置文件
+### 新增Log4j2.xml 日志配置文件
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -182,9 +182,9 @@ logging:
 ```
 
 
-# Log4j 配置说明
+## Log4j 配置说明
 
-## PatternLayout
+### PatternLayout
 
 ```纯文本
 %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间,输出到毫秒的时间
@@ -203,15 +203,15 @@ hostAddress : 本地ip地址
 ```
 
 
-# Log4j2配置详解
+## Log4j2配置详解
 
-## Configuration(根节点 )
+### Configuration(根节点 )
 
 1. status : 这个用于设置log4j2自身内部的信息输出,可以不设置,当设置成trace时,会看到log4j2内部各种详细输出
 
 2. monitorInterval="60"表示每60秒配置文件会动态加载一次。在程序运行过程中，如果修改配置文件，程序会随之改变。单位是s,最小是5s.
 
-## Appenders(子节点 )
+### Appenders(子节点 )
 
 常见的有三种子节点:Console、RollingFile、File
 

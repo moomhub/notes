@@ -1,9 +1,11 @@
 # Spring Gateway 配置说明
 
 
-# Gateway常用配置
+## Gateway常用配置
 
-## 1、After 只要当前时间大于设定时间，路由才会匹配请求 - 时间匹配
+### 1、After 
+
+只要当前时间大于设定时间，路由才会匹配请求 - 时间匹配
 
 这个路由规则会在东8区的2018-12-25 14:33:47**后** ，将请求都转跳到`baidu`。
 
@@ -18,8 +20,9 @@ spring:
               - After=2018-12-25T14:33:47.789+08:00
 ```
 
+### 2、Before 
 
-## 2、Before 只要当前时间小于设定时间，路由才会匹配请求 - 时间匹配
+只要当前时间小于设定时间，路由才会匹配请求 - 时间匹配
 
 这个路由规则会在东8区的2018-12-25 14:33:47**前** ，将请求都转跳到google。
 
@@ -34,8 +37,9 @@ spring:
               - Before=2018-12-25T14:33:47.789+08:00
 ```
 
+### 3、Between 
 
-## 3、Between 只要当前时间大于第一个设定时间，并小于第二个设定时间，路由才会匹配请求 - 时间匹配
+只要当前时间大于第一个设定时间，并小于第二个设定时间，路由才会匹配请求 - 时间匹配
 
 这个路由规则会在东8区的2018-12-25 14:33:47到2018-12-26 14:33:47之间，将请求都转跳到google。
 
@@ -51,7 +55,7 @@ spring:
 ```
 
 
-## 4、Cookie
+### 4、Cookie
 
 使用的是cookie名字和正则表达式的value作为两个输入参数，请求的cookie需要匹配cookie名和符合其中value的正则
 
@@ -69,7 +73,7 @@ spring:
 ```
 
 
-## 5、Header
+### 5、Header
 
 路由匹配存在名为X-Request-Id，内容为数字的header的请求，将请求转发到google。
 
@@ -85,7 +89,7 @@ spring:
 ```
 
 
-## 6、Host
+### 6、Host
 
 使用的是host的列表作为参数，host使用Ant style匹配
 
@@ -103,7 +107,7 @@ spring:
 ```
 
 
-## 7、Method
+### 7、Method
 
 Method Route Predicate Factory是通过HTTP的method来匹配路由。
 
@@ -121,7 +125,7 @@ spring:
 ```
 
 
-## 8、Path
+### 8、Path
 
 Path Route Predicate Factory使用的是path列表作为参数，使用Spring的PathMatcher匹配path，可以设置可选变量。
 
@@ -139,7 +143,7 @@ spring:
 ```
 
 
-## 9、Query
+### 9、Query
 
 Query Route Predicate Factory可以通过一个或两个参数来匹配路由，一个是查询的name，一个是查询的正则value。
 
@@ -175,11 +179,11 @@ spring:
 ```
 
 
-# 二、GatewayFilter 使用
+## 二、GatewayFilter 使用
 
 Route filters可以通过一些方式修改HTTP请求的输入和输出，针对某些特殊的场景，Spring Cloud Gateway已经内置了很多不同功能的GatewayFilter Factories。
 
-## 1、AddRequestHeader
+### 1、AddRequestHeader
 
 AddRequestHeader GatewayFilter Factory通过配置name和value可以增加请求的header。
 
@@ -197,7 +201,7 @@ spring:
 ```
 
 
-## 2、AddRequestParameter
+### 2、AddRequestParameter
 
 AddRequestParameter GatewayFilter Factory通过配置name和value可以增加请求的参数
 
@@ -215,7 +219,7 @@ spring:
 ```
 
 
-## 3、AddResponseHeader
+### 3、AddResponseHeader
 
 AddResponseHeader GatewayFilter Factory通过配置name和value可以增加响应的header。
 
@@ -233,7 +237,7 @@ spring:
 ```
 
 
-## 4、Hystrix
+### 4、Hystrix
 
 Hystrix是Netflix实现的断路器模式工具包，The Hystrix GatewayFilter就是将断路器使用在gateway的路由上，目的是保护你的服务避免级联故障，以及在下游失败时可以降级返回。
 
@@ -302,7 +306,7 @@ hystrix:
 ```
 
 
-## 5、FallbackHeaders
+### 5、FallbackHeaders
 
 FallbackHeaders GatewayFilter Factory可以将Hystrix执行的异常信息添加到外部请求的fallbackUriheader上。
 
@@ -346,7 +350,7 @@ rootCauseExceptionMessageHeaderName ("Root-Cause-Exception-Message")
 ```
 
 
-## 6、PrefixPath
+### 6、PrefixPath
 
 PrefixPath GatewayFilter Factor通过设置prefix参数来路径前缀。
 
@@ -364,7 +368,7 @@ spring:
 ```
 
 
-## 7、PreserveHostHeader
+### 7、PreserveHostHeader
 
 PreserveHostHeader GatewayFilter Factory会保留原始请求的host头信息，并原封不动的转发出去，而不是被gateway的http客户端重置。
 
@@ -388,7 +392,7 @@ RequestRateLimiter GatewayFilter可以使用一个可选参数keyResolver来做�
 
 keyResolver是KeyResolver接口的一个实现bean，在配置里面，通过SpEL表达式#{@myKeyResolver}来管理bean的名字myKeyResolver
 
-## 9、RemoveNonProxyHeaders
+### 9、RemoveNonProxyHeaders
 
 RemoveNonProxyHeaders GatewayFilter Factory转发请求是会根据IETF的定义，默认会移除下列的http头信息：
 
@@ -741,75 +745,4 @@ public RouteLocator routes(RouteLocatorBuilder builder) {
         .build();
 }
 ```
-
-
-# Hystrix
-
-集成Hystrix的断路器功能
-
-分布式系统环境下，服务间类似依赖非常常见，一个业务调用通常依赖多个基础服务。如下图，对于同步调用，当库存服务不可用时，商品服务请求线程被阻塞，当有大批量请求调用库存服务时，最终可能导致整个商品服务资源耗尽，无法继续对外提供服务。并且这种不可用可能沿请求调用链向上传递，这种现象被称为雪崩效应。
-
-img
-
-雪崩效应常见场景
-
-```纯文本
-硬件故障：如服务器宕机，机房断电，光纤被挖断等。
-
-流量激增：如异常流量，重试加大流量等。
-
-缓存穿透：一般发生在应用重启，所有缓存失效时，以及短时间内大量缓存失效时。大量的缓存不命中，使请求直击后端服务，造成服务提供者超负荷运行，引起服务不可用。
-
-程序BUG：如程序逻辑导致内存泄漏，JVM长时间FullGC等。
-
-同步等待：服务间采用同步调用模式，同步等待造成的资源耗尽。
-```
-
-
-雪崩效应应对策略
-
-针对造成雪崩效应的不同场景，可以使用不同的应对策略，没有一种通用所有场景的策略，参考如下：
-
-```纯文本
-硬件故障：多机房容灾、异地多活等。
-
-流量激增：服务自动扩容、流量控制（限流、关闭重试）等。
-
-缓存穿透：缓存预加载、缓存异步加载等。
-
-程序BUG：修改程序bug、及时释放资源等。
-
-同步等待：资源隔离、MQ解耦、不可用服务调用快速失败等。资源隔离通常指不同服务调用采用不同的线程池；不可用服务调用快速失败一般通过熔断器模式结合超时机制实现。
-```
-
-
-综上所述，如果一个应用不能对来自依赖的故障进行隔离，那该应用本身就处在被拖垮的风险中。 因此，为了构建稳定、可靠的分布式系统，我们的服务应当具有自我保护能力，当依赖服务不可用时，当前服务启动自我保护功能，从而避免发生雪崩效应。本文将重点介绍使用Hystrix解决同步等待的雪崩问题。
-
-断路器工作原理
-
-服务端的服务降级逻辑会因为hystrix命令调用依赖服务超时而触发，也就是说调用服务超时会进入断路回调逻辑处理。但是即使这样，受限于Hystrix超时时间的问题，调用依然会有可能产生堆积。
-
-这个时候断路器就会发挥作用。这里涉及到断路器的三个重要参数：
-
-快照时间窗
-
-断路器确定是否打开需要统计一些请求和错误数据，而统计的时间范围就是快照时间窗，默认为最近的10秒。
-
-请求总数下限
-
-在快照时间窗内，必须满足请求总数下限才有资格熔断。默认为20，意味着在10秒内，如果该hystrix命令的调用次数不足20，即使所有的请求都超时或者其他原因失败，断路器都不会打开。
-
-错误百分比下限
-
-当请求总数在快照时间窗口内超过了下限，比如发生了30次调用，如果在这30次调用中有16次发生了超时异常，也就是超过了50%错误百分比，在默认设定50%下限情况下，这时候就会将断路器打开。
-
-因此，断路器打开的条件是：在时间快照窗口期（默认为10s）内，至少发生20次服务调用，并且服务调用错误率超过50%。
-
-不满足条件时断路器并不会打开，服务调用错误只会触发服务降级，也就是调用fallback函数，每个请求时间延迟就是近似hystrix的超时时间。如果将超时时间设置为5秒，那么每个请求都要延迟5每秒才会返回。当断路器在10秒内发现请求总数超过20并且错误率超过50%，这时候断路器会打开。之后再有请求调用的时候，将不会调用主逻辑，而是直接调用降级逻辑，这个时候就不会等待5秒之后才会返回fallback。通过断路器实现自动发现错误并将降级逻辑切换为主逻辑，减少响应延迟的效果。
-
-在断路器打开之后，处理逻辑并没有结束，此时降级逻辑已经被切换为主逻辑了，那么原来的主逻辑要如何恢复呢？实际上hystrix也实现了这一点：当断路器打开，对主逻辑进行熔断之后，hystrix会启动一个休眠时间窗，在这个时间窗内，降级逻辑是临时的主逻辑，当休眠时间窗到期，断路器将进入半开状态，释放一次请求到原来的主逻辑，如果此次请求正常返回，那么断路器将进行闭合，主逻辑恢复，如果这次请求依然有问题，断路器继续进入打开状态，休眠时间窗重新计时。
-
-换句话说，断路器每隔一段时间进行一次重试，看看原来的主逻辑是否可用，可用就关闭，不可用就继续打开。
-
-通过上面的机制，hystrix的断路器实现了对依赖资源故障的处理，对降级策略的自动切换以及对主逻辑的自动恢复。这使得我们的微服务在依赖外部服务或资源的时候得到了非常好的保护，同时对于一些具备降级逻辑的业务需求可以实现自动化的切换和恢复，相比于设置开关由监控和运维来进行切换的传统实现方式显得更为智能和高效。
 

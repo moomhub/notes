@@ -136,13 +136,13 @@ public class CyclicBarrierTest {
 
 
 
-# 锁机制
+## 锁机制
 
-## ReentrantLock
+### ReentrantLock
 
 ReentrantLock与Lock锁有区别
 
-### 代码实例
+#### 代码实例
 
 ReentrantLock和ReentrantReadWriteLock
 
@@ -195,9 +195,9 @@ try{
 
 
 
-## Condition
+### Condition
 
-### 概念
+#### 概念
 
 有点类似于监视器方法,类似于等待信号来响应
 
@@ -215,11 +215,11 @@ Object中的`wait(),notify(),notifyAll()`方法是和`"同步锁"`(synchronized�
 
 
 
-![img](https://cdn.nlark.com/yuque/0/2020/png/395018/1608629547727-cfd44e4c-031d-402e-9bc2-13917ff0a26e.png)
+![img](https://gitee.com/moomhub/img/raw/master/1608629547727-cfd44e4c-031d-402e-9bc2-13917ff0a26e.png)
 
 
 
-![img](https://cdn.nlark.com/yuque/0/2020/png/395018/1608629547815-76a68e07-1e04-4541-a260-ae459240e0b6.png)
+![img](https://gitee.com/moomhub/img/raw/master/1608629547815-76a68e07-1e04-4541-a260-ae459240e0b6.png)
 
 
 

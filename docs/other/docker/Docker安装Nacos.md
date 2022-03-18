@@ -1,22 +1,24 @@
 # Docker 安装Nacos
 
-# 一、拉取镜像
+## 一、拉取镜像
 
-docker 查询最新Nacos 版本<br />[https://hub.docker.com/r/nacos/nacos-server/tags](https://hub.docker.com/r/nacos/nacos-server/tags)
+docker 查询最新Nacos 版本
+
+[https://hub.docker.com/r/nacos/nacos-server/tags](https://hub.docker.com/r/nacos/nacos-server/tags)
 
 ---
 
-```powershell
+```shell
 docker pull nacos/nacos-server:1.4.0
 docker images
 ```
 
 
-# 二、创建本地映射目录和文件
+## 二、创建本地映射目录和文件
 
-## 1、创建目录
+### 1、创建目录
 
-```纯文本
+```shell
 mkdir -p /opt/docker/nacos/logs/   # 新建logs目录
 mkdir -p /opt/docker/nacos/init.d/  
 vim /mydata/nacos/init.d/custom.properties # 修改配置文件
@@ -24,12 +26,12 @@ vim /mydata/nacos/init.d/custom.properties # 修改配置文件
 ```
 
 
-## 2、修改custom.properties文件
+### 2、修改custom.properties文件
 
 > 要配置mysql，查看MySQL账号和地址
 
 
-```纯文本
+```properties
 erver.contextPath=/nacos
 server.servlet.contextPath=/nacos
 server.port=8848
@@ -58,11 +60,11 @@ nacos.naming.expireInstance=true
 ```
 
 
-# 三、启动docker容器
+## 三、启动docker容器
 
 前提条件做好后，就可以下运行命令
 
-```纯文本
+```shell
 docker  run --name nacos -p 8848:8848   \
 --privileged=true \
 --network mynetwork --ip 172.18.0.20 \
@@ -80,7 +82,7 @@ docker  run --name nacos -p 8848:8848   \
 ```
 
 
-```PowerShell
+```shell
 docker  run --name nacos -p 8848:8848   \
 --privileged=true \
 --network mynetwork --ip 172.18.0.20 \

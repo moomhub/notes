@@ -54,7 +54,10 @@ const mysql = [
   {
     text: "数据库案例-新零售商城数据库设计",
     collapsible: true,
-    children: ["/database/mysql/Mysql项目-新零售数据库设计.md"],
+    children: [
+      "/database/mysql/Mysql项目-程序设计.md",
+      "/database/mysql/Mysql项目-新零售数据库设计.md",
+    ],
   },
 ];
 

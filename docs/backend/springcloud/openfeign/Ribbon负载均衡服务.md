@@ -34,7 +34,7 @@ Ribbon其实就是一个软负载均衡的客户端组件。它可以和其他�
 
 ### Ribbon原理图
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/395018/1624517391827-391f0403-7470-481a-95b3-2baf9083e2c9.png#align=left&display=inline&height=269&margin=%5Bobject%20Object%5D&name=image.png&originHeight=538&originWidth=1025&size=185251&status=done&style=none&width=512.5)
+
 
 ### Ribbon在工作的时候分成两步
 

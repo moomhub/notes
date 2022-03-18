@@ -75,7 +75,7 @@ spring:
 
 ## 消费者属性通用属性
 
-#### [Consumer Properties](https://docs.spring.io/spring-cloud-stream/docs/3.1.3/reference/html/spring-cloud-stream.html#_consumer_properties)
+[Consumer Properties](https://docs.spring.io/spring-cloud-stream/docs/3.1.3/reference/html/spring-cloud-stream.html#_consumer_properties)
 
 这些属性通过 org.springframework.cloud.stream.binder.ConsumerProperties 公开 以下绑定属性仅可用于输入绑定，并且必须以 spring.cloud.stream.bindings..consumer 为前缀。 （例如，spring.cloud.stream.bindings.input.consumer.concurrency=3）。 可以使用 spring.cloud.stream.default.consumer 前缀（例如 spring.cloud.stream.default.consumer.headerMode=none）设置默认值。
 
@@ -155,7 +155,7 @@ spring:
 
 producer 生产者配置
 
-#### [Producer Properties](https://docs.spring.io/spring-cloud-stream/docs/3.1.3/reference/html/spring-cloud-stream.html#_producer_properties)
+[Producer Properties](https://docs.spring.io/spring-cloud-stream/docs/3.1.3/reference/html/spring-cloud-stream.html#_producer_properties)
 
 These properties are exposed via `org.springframework.cloud.stream.binder.ProducerProperties`
 

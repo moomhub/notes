@@ -1,146 +1,3 @@
-# Mysql 数据库设计
-
-> 确定相关的数据模型和数据业务，根据围绕的业务来进行设计
->
-> 1.  需求分析:根据用户的需求，分析出需要记录的数据
-> 2. 概要设计:根据分析出的数据，设计ER图
-> 3. 详细设计:将ER图转换成数据库模型图和数据表
-
-
-
-## 数据模型
-
-### 瀑布模型
-
-
-
-![image-20210913095243953](http://cdn.oboom.top/doc/image-20210913095243953.png)
-
-### 螺旋模型
-
-
-
-![image-20210913095326810](http://cdn.oboom.top/doc/image-20210913095326810.png)
-
-### 使用 visio 图制定ER图
-
-![image-20210913100910944](http://cdn.oboom.top/doc/image-20210913100910944.png)
-
-
-
-### 数据库模型图
-
-
-
-![image-20210913100917851](http://cdn.oboom.top/doc/image-20210913100917851.png)
-
-
-
-## 数据库引擎
-
-TokuDB引擎（（过期数据存储）归档数据表）> InnoDB引擎>MyISAM引擎
-
-
-
-## 数据库常用操作
-
-### 忽略错误，继续执行
-
-> IGNORE 关键字
-
-```mysql
-INSERT IGNORE  xxx () value ();
-```
-
-### 存在就更新，不存在则插入
-
-> ON DUPLICATE KEY UPDATE ip=VALUES(ip);
-
-```mysql
-INSERT INTO t_emp_ip (id,  empno, ip) VALUES 
-(5, 8004, "192.168.99.44"),
-(6, 8005, "192.168.99.45"),
-(7, 8006, "192.168.99.46"),
-(8, 8001, "192.168.99.47")
-ON DUPLICATE KEY UPDATE ip=VALUES(ip);
-```
-
-
-
-要不要使用子查询
-
-
-
-因为MyBatis等持久层框架开启了缓存功能，其中一级缓存就会保存子查询的结果，所以可以可放心使用子查询
-结论: SQL控制台不要使用子查询，在持久层框架中则可以使用
-
-如何代替子查询
-
-from 子查询 代替 where 子查询
-
-> from 子查询 执行一次
-
-```mysql
-select * from temp t
-join (xxx) a on a.aa> t.xx and xxx
-```
-
-
-
-外连接
-
-> 内连接里，查询条件写在ON子句或者WHERE子句，效果相同
-
-```mysql
-SELECT e.ename, d.dname
-FROM t_emp e
-JOIN t_dept d ON e.deptno =d.deptno AND d.deptno=10;
-# 相同
-SELECT e.ename, d.dnameFROM t_emp e
-JOIN t_dept d ON e.deptno = d.deptno 
-WHERE d.deptno=10;
-
-```
-
-外连接不行
-
-```mysql
-SELECT e.ename,d.dnameFROM t_emp e
-LEFT JOIN t_dept d ON e.deptno =d.deptno AND d.deptno=10;
-
-SELECT e.ename,d.dnameFROM t_emp e
-LEFT JOIN t_dept d ON e.deptno =d.deptno 
-where d.deptno=10;
-
-```
-
-
-
-
-
-表连接修改
-
-更新
-
-> 修改 SALES 部门的名称 同时修改改部门员工的底薪为 10000元
-
-```mysql
-UPDATE t_emp e JOIN t_dept d oN e.deptno = d.deptnoAND d.dname= 'SALES'
-SET e.sal=10000,d.dname="销售部";
-```
-
-删除
-
-> 删除部门为销售部和部门员工删除
-
-```mysql
-DELETE e,d JOIN t_dept d oN e.deptno = d.deptno AND d.dname= '销售部';
-```
-
-
-
-
-
 # 新零售数据库设计
 
 ## 主要概念
@@ -161,11 +18,11 @@ SKU：商品信息
 
 ### 品类和参数绑定
 
-![image-20210922101420858](http://cdn.oboom.top/doc/image-20210922101420858.png)
+![image-20210922101420858](https://gitee.com/moomhub/img/raw/master/image-20210922101420858.png)
 
 ### 参数和SKU(商品)关系
 
-![image-20210922101458402](http://cdn.oboom.top/doc/image-20210922101458402.png)
+![image-20210922101458402](https://gitee.com/moomhub/img/raw/master/image-20210922101458402.png)
 
 
 
@@ -247,7 +104,6 @@ CREATE TABLE t_spu(
 )COMMENT="产品表";
 
 
-
 ```
 
 
@@ -257,7 +113,7 @@ CREATE TABLE t_spu(
 订单号：订单的唯一编号， 而且经常被用来检索，所以应当是数字类型的主键
 流水号：打印在购物单据上的字符串，便于阅读，但是不用做查询
 
-![流水号生成参考](http://cdn.oboom.top/doc/image-20210913175450421.png)
+![image-20220318141429800](https://gitee.com/moomhub/img/raw/master/image-20220318141429800.png)
 
 
 
@@ -277,11 +133,11 @@ CREATE TABLE t_spu(
 
 
 
-![image-20210914110223115](http://cdn.oboom.top/doc/image-20210914110223115.png)
+![image-20210914110223115](https://gitee.com/moomhub/img/raw/master/image-20210914110223115.png)
 
 ### 乐观锁
 
-![image-20210914110358000](http://cdn.oboom.top/doc/image-20210914110358000.png)
+![image-20210914110358000](https://gitee.com/moomhub/img/raw/master/image-20210914110358000.png)
 
 ### 使用redis库存
 
@@ -293,7 +149,7 @@ CREATE TABLE t_spu(
 
 Redis引入了事务机制(批处理)，一次性把多条命令传递给Redis执行，这就避免了其他客户端中间插队，出现超售的现象。
 
-![image-20210914112149311](http://cdn.oboom.top/doc/image-20210914112149311.png)
+![image-20210914112149311](https://gitee.com/moomhub/img/raw/master/image-20210914112149311.png)
 
 
 
@@ -399,7 +255,7 @@ public class Demo {
 
 
 
-![image-20210913175450421](http://cdn.oboom.top/doc/image-20210913175450421.png)
+![image-20210913175450421](https://gitee.com/moomhub/img/raw/master/image-20210913175450421.png)
 
 
 
@@ -409,7 +265,7 @@ public class Demo {
 
 
 
-![image-20210915104205886](http://cdn.oboom.top/doc/image-20210915104205886.png)
+![image-20210915104205886](https://gitee.com/moomhub/img/raw/master/image-20210915104205886.png)
 
 
 

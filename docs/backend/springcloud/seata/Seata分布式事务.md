@@ -124,7 +124,7 @@ Seata Client 配置文件
 
 ### pom.xml
 
-```纯文本
+```xml
     <dependency>
             <groupId>io.seata</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>

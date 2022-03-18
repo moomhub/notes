@@ -1,6 +1,6 @@
 # Docker 安装
 
-# Docker-Linux平台安装
+## Docker-Linux平台安装
 
 ```shell
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
@@ -8,7 +8,7 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
 
 
-## Ubuntu 14.04 16.04 (使用apt-get进行安装)
+### Ubuntu 14.04 16.04 (使用apt-get进行安装)
 
 ```bash
 # step 1: 安装必要的一些系统工具
@@ -24,7 +24,7 @@ sudo apt-get -y install docker-ce
 ```
 
 
-## CentOS 7 (使用yum进行安装)
+### CentOS 7 (使用yum进行安装)
 
 ```bash
 # step 1: 安装必要的一些系统工具
@@ -39,9 +39,9 @@ sudo service docker start
 ```
 
 
-# Docker 命令说明
+## Docker 命令说明
 
-## docker基础命令
+### docker基础命令
 
 ```PowerShell
 
@@ -52,15 +52,14 @@ docker version  #查查版本
 docker info     #查看info
 ```
 
-
-Docker 设置开机启动
+### Docker 设置开机启动
 
 ```PowerShell
 systemctl stop  docker
 ```
 
 
-## 修改docker镜像加速
+### 修改docker镜像加速
 
 修改为网易、阿里、daocloud加速
 
@@ -85,29 +84,26 @@ systemctl stop  docker
 ```
 
 
-# Docker 卸载
+## Docker 卸载
 
 ```PowerShell
 apt-get autoremove docker docker-ce docker-engine  docker.io  containerd runc
 ```
 
-
-查看是否完全删除
+### 查看是否完全删除
 
 ```PowerShell
 dpkg -l | grep docker
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P # 删除无用的相关的配置文件
 ```
 
-
-删除相关项
+### 删除相关项
 
 ```PowerShell
 apt-get autoremove docker-ce-*
 ```
 
-
-删除docker的相关配置&目录
+### 删除docker的相关配置&目录
 
 ```PowerShell
 rm -rf /etc/systemd/system/docker.service.d
@@ -115,7 +111,7 @@ rm -rf /var/lib/docker
 ```
 
 
-# docker 加速
+## docker 加速
 
 ```PowerShell
 sudo mkdir -p /etc/docker
@@ -134,7 +130,7 @@ sudo systemctl restart docker
 docker 暴露端口2375
 ```
 
-# docker开启2375 端口
+## docker开启2375 端口
 
 开启2375端口实现远程连接
 

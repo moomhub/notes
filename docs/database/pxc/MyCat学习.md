@@ -4,7 +4,7 @@
 
 > Mycat集群解决方案
 
-![image-20200924104156260](https://i.loli.net/2020/09/24/QtrzJfdehqGElxb.png)
+![image-20200924104156260](https://gitee.com/moomhub/img/raw/master/QtrzJfdehqGElxb.png)
 
 ### 1、MyCat 安装（Linux）
 
@@ -172,7 +172,7 @@ wrapper.java.additional.11=-Xms256M
 
 service mycat start 启动查看效果，结果能正常启动了
 
-![img](https://img-blog.csdnimg.cn/20191116121127936.png)
+![img](https://gitee.com/moomhub/img/raw/master/20191116121127936.png)
 
 ### 设置开机自启
 
@@ -184,7 +184,7 @@ chkconfig --add mycat
 
  重启查看效果
 
-![img](https://img-blog.csdnimg.cn/20191116121143883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODg2MDU2NQ==,size_16,color_FFFFFF,t_70)
+![img](https://gitee.com/moomhub/img/raw/master/20191116121143883.png)
 
 ### 脚本开机启动
 
@@ -319,7 +319,7 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 
 
 
-![image-20200924102323872](https://i.loli.net/2020/09/24/uKvUxtDn7mWyC6M.png)
+![image-20200924102323872](https://gitee.com/moomhub/img/raw/master/uKvUxtDn7mWyC6M.png)
 
 ```xml
 <schema name="test" checksQLschema="false" sqlMaxLimit="100">

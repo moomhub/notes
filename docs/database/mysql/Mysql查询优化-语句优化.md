@@ -78,7 +78,7 @@ SHOW INDEX FROM city_1
 
 
 
-![image-20210901161152550](https://i.loli.net/2021/09/03/gawfzdjZroSep2h.png)
+![image-20210901161152550](https://gitee.com/moomhub/img/raw/master/gawfzdjZroSep2h.png)
 
 ### 重新计数
 
@@ -188,13 +188,13 @@ SELECT title, description FROM `film`ORDER BY RAND()LIMIT 1;
 
 执行顺序
 
-![image-20210901175007507](https://i.loli.net/2021/09/03/4MeCskRzG7bcyIF.png)
+![image-20210901175007507](https://gitee.com/moomhub/img/raw/master/4MeCskRzG7bcyIF.png)
 
-![image-20210901175017031](https://i.loli.net/2021/09/03/mtKfisCzeRYONVI.png)
+![image-20210901175017031](https://gitee.com/moomhub/img/raw/master/mtKfisCzeRYONVI.png)
 
-![image-20210901175052299](https://i.loli.net/2021/09/03/UxFpEtMRC2vP5Iq.png)
+![image-20210901175052299](https://gitee.com/moomhub/img/raw/master/UxFpEtMRC2vP5Iq.png)
 
-![image-20210901175208423](https://i.loli.net/2021/09/03/ahtgmer4YiQFcEN.png)
+![image-20210901175208423](https://gitee.com/moomhub/img/raw/master/ahtgmer4YiQFcEN.png)
 
 
 
@@ -248,7 +248,7 @@ SELECT * FROM`inventory_3` WHERE store_id in (1, 2) and film_id = 3;
 
 
 
-![image-20210916145631423](http://cdn.oboom.top/doc/image-20210916145631423.png)
+![image-20210916145631423](https://gitee.com/moomhub/img/raw/master/image-20210916145631423.png)
 
 ## 索引左侧用法
 

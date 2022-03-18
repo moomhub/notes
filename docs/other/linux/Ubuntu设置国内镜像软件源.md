@@ -6,8 +6,9 @@
 cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
 
+的三个长期版本：
 
-的三个长期版本：<br />版本号	代号	发布时间
+版本号	代号	发布时间
 
 |版本号|代号|发布时间|
 |---|---|---|
@@ -17,7 +18,9 @@ cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak
 
 
 
->  软件源区别<br />#阿里源  18.04 版本
+>   软件源区别
+>
+>  #阿里源  18.04 版本
 
 
 > deb [http://mirrors.aliyun.com/ubuntu/](http://mirrors.aliyun.com/ubuntu/) **bionic **main restricted universe multiverse
@@ -98,6 +101,10 @@ deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe 
 deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
 ```
 
+## 更新软件源
 
-apt update<br />apt upgrade
+```
+apt update
+apt upgrade
+```
 

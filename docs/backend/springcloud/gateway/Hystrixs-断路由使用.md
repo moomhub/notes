@@ -311,8 +311,8 @@ fallback: 断路器
 |---|---|
 |circuitBreaker.enabled|是否启动断路器|
 |circuitBreaker.requestVolumeThreshold|用来设置在滚动时间窗中，断路器熔断的最小请求数。例如，默认该值为20的时候，如果滚动时间窗（默认10秒）内仅收到19个请求，即使这19个请求都失败了，断路器也不会打开。|
-|**** **circuitBreaker.sleepWindowInMilliseconds** |用来设置当断路器打开之后的休眠时间窗。休眠时间窗结束之后，会将断路器设置为“半开”状态，尝试熔断的请求命令，如果依然时候就将断路器继续设置为“打开”状态，如果成功，就设置为“关闭”状态。|
-|**** **circuitBreaker.errorThresholdPercentage** |该属性用来设置断路器打开的错误百分比条件。默认值为50，表示在滚动时间窗中，在请求值超过requestVolumeThreshold阈值的前提下，如果错误请求数百分比超过50，就把断路器设置为“打开”状态，否则就设置为“关闭”状态 （百分值）|
+|**circuitBreaker.sleepWindowInMilliseconds** |用来设置当断路器打开之后的休眠时间窗。休眠时间窗结束之后，会将断路器设置为“半开”状态，尝试熔断的请求命令，如果依然时候就将断路器继续设置为“打开”状态，如果成功，就设置为“关闭”状态。|
+|**circuitBreaker.errorThresholdPercentage** |该属性用来设置断路器打开的错误百分比条件。默认值为50，表示在滚动时间窗中，在请求值超过requestVolumeThreshold阈值的前提下，如果错误请求数百分比超过50，就把断路器设置为“打开”状态，否则就设置为“关闭”状态 （百分值）|
 |circuitBreaker.forceOpen|断路器强制进入“打开”状态|
 |circuitBreaker.forceClosed|断路器强制进入“关闭”状态|
 
@@ -361,7 +361,11 @@ requestCache : 请求缓存
 
 HystrixCommand注解有多个配置的参数，比如：
 
-groupKey：命令分组键，可以根据这个分组，统计他的各个指标，默认类名。<br />commandKey：命令键，默认方法名。<br />threadPoolKey：线程池名，如果没有设置，默认为groupKey。<br />fallbackMethod：服务降级调用的方法。<br />threadPoolProperties：配置线程池用的。
+groupKey：命令分组键，可以根据这个分组，统计他的各个指标，默认类名。
+commandKey：命令键，默认方法名。
+threadPoolKey：线程池名，如果没有设置，默认为groupKey。
+fallbackMethod：服务降级调用的方法。
+threadPoolProperties：配置线程池用的。
 
 使用注解 `@HystrixCommand` 标记调用失败时需要熔断的方法，`fallbackMethod` 属性指定 **降级方法**  的 **方法名**  为 `fallback`。
 

@@ -1,6 +1,6 @@
 # Spring Boot 拦截器
 
-传统的Spring MVC 拦截器
+## 传统的Spring MVC 拦截器
 
 实现 `HandlerInterceptor` 接口
 
@@ -59,8 +59,7 @@ public class LogHandlerInterceptor implements HandlerInterceptor {
 }
 ```
 
-
-注入SpringMvcConfig 中
+## 注入SpringMvcConfig 中
 
 ```java
 @Configuration
@@ -130,8 +129,7 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 }
 ```
 
-
-Spring boot 实现 Filter 过滤器
+## Spring boot 实现 Filter 过滤器
 
 首先我们需要创建一个类，让它实现 Filter 接口，然后重写接口中的方法：
 
@@ -350,5 +348,4 @@ public class WebFluxSecurityCorsFilter implements WebFilter {
     }
 }
 ```
-
 

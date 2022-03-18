@@ -1,7 +1,7 @@
 # Stream 整合 Rocketmq 实现事务消息（三）
 
 
-# 什么是事务性消息
+## 什么是事务性消息
 
 通过场景来看：
 
@@ -17,7 +17,7 @@
 
 但是网络是不稳定的，如果MQ端确实收到了这条消息，只是返回给客户端的响应丢失了，就出现跟1一样的问题。
 
-# 配置文件
+## 配置文件
 
 ```yaml
 spring:
@@ -42,7 +42,7 @@ spring:
 ```
 
 
-# 事务消息生产者
+## 事务消息生产者
 
 ```纯文本
   @Override
@@ -63,7 +63,7 @@ spring:
 ```
 
 
-# RocketMQ事务监听
+## RocketMQ事务监听
 
 ```java
 @RocketMQTransactionListener(txProducerGroup = "transactional_stream_group")
@@ -145,5 +145,13 @@ public class RocketMQMessageTransactionListener implements RocketMQLocalTransact
 
 第二种，记录 msg 的事务编号，与事务状态到数据库中。
 
-第一步，在 #executeLocalTransaction(...) 方法中，先存储一条 id 为 msg 的事务编号，状态为 RocketMQLocalTransactionState.UNKNOWN 的记录。<br />第二步，调用带有事务的业务 Service 的方法。在该 Service 方法中，在逻辑都执行成功的情况下，更新 id 为 msg 的事务编号，状态变更为 RocketMQLocalTransactionState.COMMIT 。这样，我们就可以伴随这个事务的提交，更新 id 为 msg 的事务编号的记录的状为 RocketMQLocalTransactionState.COMMIT ，美滋滋。。<br />第三步，要以 try-catch 的方式，调用业务 Service 的方法。如此，如果发生异常，回滚事务的时候，可以在 catch 中，更新 id 为 msg 的事务编号的记录的状态为 RocketMQLocalTransactionState.ROLLBACK 。😭 极端情况下，可能更新失败，则打印 error 日志，告警知道，人工介入。<br />如此三步之后，我们在 #executeLocalTransaction(...) 方法中，就可以通过查找数据库，id 为 msg 的事务编号的记录的状态，然后返回。<br />相比来说，倾向第一种，实现更加简单通用，对于业务开发者，更加友好。和有几个朋友沟通了下，但他们是采用第二种。
+第一步，在 #executeLocalTransaction(...) 方法中，先存储一条 id 为 msg 的事务编号，状态为 RocketMQLocalTransactionState.UNKNOWN 的记录。
+
+第二步，调用带有事务的业务 Service 的方法。在该 Service 方法中，在逻辑都执行成功的情况下，更新 id 为 msg 的事务编号，状态变更为 RocketMQLocalTransactionState.COMMIT 。这样，我们就可以伴随这个事务的提交，更新 id 为 msg 的事务编号的记录的状为 RocketMQLocalTransactionState.COMMIT ，美滋滋。。
+
+第三步，要以 try-catch 的方式，调用业务 Service 的方法。如此，如果发生异常，回滚事务的时候，可以在 catch 中，更新 id 为 msg 的事务编号的记录的状态为 RocketMQLocalTransactionState.ROLLBACK 。😭 极端情况下，可能更新失败，则打印 error 日志，告警知道，人工介入。
+
+如此三步之后，我们在 #executeLocalTransaction(...) 方法中，就可以通过查找数据库，id 为 msg 的事务编号的记录的状态，然后返回。
+
+相比来说，倾向第一种，实现更加简单通用，对于业务开发者，更加友好。和有几个朋友沟通了下，但他们是采用第二种。
 

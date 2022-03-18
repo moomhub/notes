@@ -11,7 +11,7 @@ Spring Cloud Stream实现消息过滤的方式主要有三种。
 
 3. 使用SQL92语法进行过滤。
 
-# 1、condition（通用所有的MQ）
+## 1、condition（通用所有的MQ）
 
 这种方式适用于所有的MQ，也是最简单易用的方式。首先我们为生产者的消息设置一个header，具体的header名称和值可根据实际业务需求进行设置。这里仅作为示例，具体代码如下：
 
@@ -85,7 +85,7 @@ public class TestStreamConsumer {
 
 现在我们来做个简单的测试，通过生产者投递两个消息，一个消息的flagHeader=UP，另一个消息的flagHeader=DOWN。消费者输出的日志信息如下：
 
-# 2、TAGS
+## 2、TAGS
 
 这种方式仅RocketMQ支持，Kafka、RabbitMQ不支持。该方式也需要为生产者生产的消息设置header，只不过这个header稍微有些特殊而已。我们基于上一小节的代码进行修改，修改后的代码如下：
 
@@ -175,7 +175,7 @@ spring:
 ```
 
 
-# 3、SQL92
+## 3、SQL92
 
 这种方式仅RocketMQ支持，Kafka、RabbitMQ不支持，若使用该方式，则不要使用TAGS。该方式是使用SQL语法过滤消息，具体可参考官方文档：
 

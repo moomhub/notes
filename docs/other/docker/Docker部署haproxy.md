@@ -1,6 +1,6 @@
-## Docker部署haproxy
+# Docker部署haproxy
 
-一、docker 拉取镜像
+## docker 拉取镜像
 
 haproxy 版本
 
@@ -55,11 +55,7 @@ instantlinux/haproxy-keepalived:latest
 
 ```
 
-Haproxy 默认配置文件
-
-
-
-
+## Haproxy 默认配置文件
 
 ```sh
 docker run -d --name mycat2 \
@@ -104,7 +100,7 @@ instantlinux/haproxy-keepalived:latest
 
 
 
-```sh
+```properties
 global
     log 127.0.0.1 local0 info  # 日志存储到127.0.0.1,以local0输入info级别
     maxconn 4096 # 最大连接数,要考虑到ulimit -n的大小限制
@@ -151,9 +147,9 @@ listen rabbitmq_admin
 
 
 
-Haproxy配置文件（一)
+## Haproxy配置文件
 
-```sh
+```properties
 listen admin_stats
 bind 0.0.0.0:4001
 #监控界面的访问的IP和端口
@@ -176,7 +172,7 @@ option tcpka #使用keepalive检测死链
 
 
 
-keepalived配置文件
+## keepalived配置文件
 
 ```nginx
 vrrp_instance VI_1 {
@@ -202,9 +198,3 @@ vrrp_instance VI_1 {
 ```
 
 
-
-
-
-什么是基准测试
-辑，更加简单、直接、易于测试，不要求真实
-基准测试是针对系统的一种压力测试，但基准测试不关心业务逻

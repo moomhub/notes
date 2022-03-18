@@ -1,5 +1,5 @@
 export const java = {
-  text: "java",
+  text: "Java",
   children: [
     {
       text: `Java 版本特性`,

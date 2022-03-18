@@ -56,7 +56,11 @@ spring:
 
 ## 3.自定义Loadbalance 算法
 
-## 参考官方链接
+
+
+
+
+## 4、参考官方链接
 
 [Loadbalance 默认算法说明](https://docs.spring.io/spring-cloud-commons/docs/3.1.0-SNAPSHOT/reference/html/#switching-between-the-load-balancing-algorithms)
 

@@ -55,7 +55,7 @@ binlog储存在4个1GB文件中，并且循环写入
 
 
 
-![image-20210906145624154](http://cdn.oboom.top/doc/image-20210906145624154.png)
+![image-20210906145624154](https://gitee.com/moomhub/img/raw/master/image-20210906145624154.png)
 
 
 

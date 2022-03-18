@@ -8,19 +8,11 @@ const newApi = [
     text: "各版本特性预览",
     collapsible: true,
     children: [
-      "/java/newApi/Java8新特性.md",
-      "/java/newApi/Java8 新特性-Stream流式编程.md",
+      "/java/newApi/Java8新特性-Stream流式编程.md",
       "/java/newApi/Java8新特性-Optional.md",
       "/java/newApi/Java8新特性-时间类.md",
       "/java/newApi/Java9新特性.md",
       "/java/newApi/Java10新特性.md",
-      "/java/newApi/Java11新特性.md",
-      "/java/newApi/Java12新特性.md",
-      "/java/newApi/Java13新特性.md",
-      "/java/newApi/Java14新特性.md",
-      "/java/newApi/Java15新特性.md",
-      "/java/newApi/Java16新特性.md",
-      "/java/newApi/Java17新特性.md",
     ],
   },
 ];
@@ -31,7 +23,6 @@ const base = [
     collapsible: true,
     children: [
       "/java/base/Java环境变量配置.md",
-      "/java/base/Java流式编程-Stream.md",
       "/java/base/Lambda表达式.md",
       "/java/base/垃圾回收GC.md",
     ],

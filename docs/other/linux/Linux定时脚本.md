@@ -1,6 +1,6 @@
 # Linux 定时脚本
 
-# linux下每间隔一段时间执行脚本
+## linux下每间隔一段时间执行脚本
 
 ```PowerShell
 #!/bin/bash
@@ -14,7 +14,7 @@ done
 
 每间隔15000s,执行一次该脚本
 
-# Centos 配置开机启动脚本启动 docker 容器
+## Centos 配置开机启动脚本启动 docker 容器
 
 I我们的 Centos 服务器上部署了好多个 docker 容器，因故重启的时候就会导致还得手动去手动重启这些 docker 容器，为什么不写个脚本自动重启呢，于是就有了这篇文章。
 

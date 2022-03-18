@@ -66,8 +66,6 @@ DELETE FROM student WHERE id NOT IN (SELECT MIN(id) FROM student GROUP BY sid,`n
 
 上面可能会报错，说是查询和删除的是同一张表，那就再查询一次虚表
 
-![1576832038562](https://cdn.static.note.zzrfdsn.cn/images/mysql/1576832038562.png)
-
 ```sql
 DELETE FROM student WHERE id NOT IN (SELECT * FROM (SELECT MIN(id) FROM student GROUP BY sid,`name`,cid,cname,score) temp);
 ```
@@ -183,8 +181,3 @@ INSERT INTO grade VALUES(NULL,'servlet',80);
 ```sql
 SELECT g.*,IF(g.score>60,'pass','fail') "考试结果" FROM grade g; 
 ```
-
-
-
-
-​			
