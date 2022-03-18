@@ -1,12 +1,12 @@
 const newApi = [
   {
     text: "8-17新特性",
-    collapsible: false,
+    collapsible: true,
     children: ["/java/newApi/8-17新特性API.md"],
   },
   {
     text: "各版本特性预览",
-    collapsible: false,
+    collapsible: true,
     children: [
       "/java/newApi/Java8新特性-Stream流式编程.md",
       "/java/newApi/Java8新特性-Optional.md",
@@ -20,7 +20,7 @@ const newApi = [
 const base = [
   {
     text: "基础",
-    collapsible: false,
+    collapsible: true,
     children: [
       "/java/base/Java环境变量配置.md",
       "/java/base/Lambda表达式.md",
@@ -32,7 +32,7 @@ const base = [
 const thread = [
   {
     text: "Thread 线程",
-    collapsible: false,
+    collapsible: true,
     children: [
       "/java/thread/线程基本概念.md",
       "/java/thread/实现线程的几种方式.md",
@@ -44,7 +44,7 @@ const thread = [
   },
   {
     text: "多线程: JUC",
-    collapsible: false,
+    collapsible: true,
     children: [
       "/java/thread/Java线程池.md",
       "/java/thread/Java并发编程-AQS并发容器同步组件.md",

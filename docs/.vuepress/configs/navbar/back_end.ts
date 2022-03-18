@@ -4,10 +4,7 @@ export const back_end = {
     {
       text: "Spring 系列",
       children: [
-        {
-          text: "Spring Boot",
-          link: "/backend/springboot/helloworld.html",
-        },
+        "/backend/springboot/helloworld.md",
         {
           text: "Spring Cloud",
           link: "/backend/springcloud/gateway/Spring-Gateway配置说明.html",
