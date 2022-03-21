@@ -32,4 +32,14 @@ const docker = [
     ],
   },
 ];
-export { linux, docker };
+
+const mix = [
+  {
+    text: "杂七杂八",
+    collapsible: false,
+    children: [
+      "/other/mix/PigGo+图床.md",
+    ],
+  }
+];
+export { linux, docker, mix };
