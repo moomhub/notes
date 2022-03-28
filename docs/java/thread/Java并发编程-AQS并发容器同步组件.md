@@ -1,19 +1,19 @@
-# Java并发编程-AQS并发容器同步组件
+# Java 并发编程-AQS 并发容器同步组件
 
-- CountDownLatch 
+- CountDownLatch
 - Semaphore
 
 - CyclicBarrier
-- ReentrantLock 
+- ReentrantLock
 
-- Condition 
+- Condition
 - FutureTask
 
 ## CountDownLatch
 
 ### 概念
 
-countDownLatch这个类使一个线程等待其他线程各自执行完毕后再执行。是通过一个计数器来实现的，计数器的初始值是线程的数量。每当一个线程执行完毕后，计数器的值就-1，当计数器的值为0时，表示所有线程都执行完毕，然后在闭锁上等待的线程就可以恢复工作了。
+countDownLatch 这个类使一个线程等待其他线程各自执行完毕后再执行。是通过一个计数器来实现的，计数器的初始值是线程的数量。每当一个线程执行完毕后，计数器的值就-1，当计数器的值为 0 时，表示所有线程都执行完毕，然后在闭锁上等待的线程就可以恢复工作了。
 
 组件的使用场景：并行计算
 
@@ -34,17 +34,15 @@ public static void main(String[] args) throws InterruptedException {
 ### 关键方法
 
 - **CountDownLatch(count)**：创建时这个方法比较简单，就是维护了一个计数器：
-- **await**()：调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行
-- **countDown**()：调用的是sync类中的方法releaseShared(arg)，注意这里固定传的是1，因为调用一次countDown()方法计数减1。
-- **await(long timeout, TimeUnit unit)**：和await()类似，只不过等待一定的时间后count值还没变为0的话--就会继续执行()
-
-
+- **await**()：调用 await()方法的线程会被挂起，它会等待直到 count 值为 0 才继续执行
+- **countDown**()：调用的是 sync 类中的方法 releaseShared(arg)，注意这里固定传的是 1，因为调用一次 countDown()方法计数减 1。
+- **await(long timeout, TimeUnit unit)**：和 await()类似，只不过等待一定的时间后 count 值还没变为 0 的话--就会继续执行()
 
 ## Semaphore
 
 ### 概念
 
-Semaphore是一个计数信号量，是并发包中提供的用于控制某资源同时被访问的个数，
+Semaphore 是一个计数信号量，是并发包中提供的用于控制某资源同时被访问的个数，
 
 ```
 Semaphore semaphore = new Semaphore(3)
@@ -58,7 +56,7 @@ public class SemaphoreExample2 {
 
     private final static int threadCount = 20;
     public static void main(String[] args) throws Exception {
-        
+
         ExecutorService exec = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(3);
         for (int i = 0; i < threadCount; i++) {
@@ -84,8 +82,6 @@ public class SemaphoreExample2 {
 }
 ```
 
-
-
 ### 关键方法
 
 - **Semaphore(permits)** ：定义一次可以通过的许可数量 创建时初始化许可数量
@@ -100,7 +96,7 @@ public class SemaphoreExample2 {
 
 ### 概念
 
-CyclicBarrier的字面意思是可循环使用（Cyclic）的屏障（Barrier）。它要做的事情是，让一 组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会 开门，所有被屏障拦截的线程才会继续运行。CyclicBarrier可以用于多线程计算数据，最后合并计算结果的场景
+CyclicBarrier 的字面意思是可循环使用（Cyclic）的屏障（Barrier）。它要做的事情是，让一 组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会 开门，所有被屏障拦截的线程才会继续运行。CyclicBarrier 可以用于多线程计算数据，最后合并计算结果的场景
 
 **等待特定数量的线程都到达同步屏障后各线程才继续执行**
 
@@ -132,19 +128,15 @@ public class CyclicBarrierTest {
 }
 ```
 
-
-
-
-
 ## 锁机制
 
 ### ReentrantLock
 
-ReentrantLock与Lock锁有区别
+ReentrantLock 与 Lock 锁有区别
 
 #### 代码实例
 
-ReentrantLock和ReentrantReadWriteLock
+ReentrantLock 和 ReentrantReadWriteLock
 
 ```java
   private final ReentrantReadWriteLock locks = new ReentrantReadWriteLock();
@@ -179,21 +171,19 @@ try{
 //...
 ```
 
-（1）Synchronized是在JVM层面上实现的，可以通过一些监控工具监控synchronized的锁定，当代码执行时出现异常，JVM会自动释放锁定。当只有少量竞争者的时候，synchronized是一个很好的通用的锁实现。Synchronized的锁是针对一个对象的。
+（1）Synchronized 是在 JVM 层面上实现的，可以通过一些监控工具监控 synchronized 的锁定，当代码执行时出现异常，JVM 会自动释放锁定。当只有少量竞争者的时候，synchronized 是一个很好的通用的锁实现。Synchronized 的锁是针对一个对象的。
 
-（2）ReentrantLock、ReentrantReadWriteLock,、StampedLock都是代码块层面的锁定，要保证锁定一定会被释放，就必须将unLock()放到finally}中。
+（2）ReentrantLock、ReentrantReadWriteLock,、StampedLock 都是代码块层面的锁定，要保证锁定一定会被释放，就必须将 unLock()放到 finally}中。
 
-（3）ReentrantLock是一个很好的通用的锁实现，使用于比较简单的加锁、解锁的业务逻辑，如果实现复杂的锁机制，当线程增长能够预估时也是可以的。
+（3）ReentrantLock 是一个很好的通用的锁实现，使用于比较简单的加锁、解锁的业务逻辑，如果实现复杂的锁机制，当线程增长能够预估时也是可以的。
 
-（4）ReentrantReadWriteLock对Lock又进行了扩展，引入了read和write阻塞和并发机制，相对于ReentrantLock，它可以实现更复杂的锁机制，且并发性也更高些。
+（4）ReentrantReadWriteLock 对 Lock 又进行了扩展，引入了 read 和 write 阻塞和并发机制，相对于 ReentrantLock，它可以实现更复杂的锁机制，且并发性也更高些。
 
-（5）StampedLock又在Lock的基础上，实现了可以满足乐观锁和悲观锁等一些在读线程越来越多的业务场景，对吞吐量有巨大的改进，但并不是说要替代之前的Lock，毕竟它还是有些应用场景的。
+（5）StampedLock 又在 Lock 的基础上，实现了可以满足乐观锁和悲观锁等一些在读线程越来越多的业务场景，对吞吐量有巨大的改进，但并不是说要替代之前的 Lock，毕竟它还是有些应用场景的。
 
-（6）StampedLock有一个复杂的API相对于前面两种Lock锁，对于加锁操作，很容易误用其他方法，如果理解不深入也更容易出现死锁和不必要的麻烦。
+（6）StampedLock 有一个复杂的 API 相对于前面两种 Lock 锁，对于加锁操作，很容易误用其他方法，如果理解不深入也更容易出现死锁和不必要的麻烦。
 
-（7）推荐如果不是业务非得需要，建议使用ReentrantLock和ReentrantReadWriteLock即可满足大部分业务场景的需要。
-
-
+（7）推荐如果不是业务非得需要，建议使用 ReentrantLock 和 ReentrantReadWriteLock 即可满足大部分业务场景的需要。
 
 ### Condition
 
@@ -201,41 +191,35 @@ try{
 
 有点类似于监视器方法,类似于等待信号来响应
 
-Condition中的`await()`方法相当于Object的`wait()`方法，
+Condition 中的`await()`方法相当于 Object 的`wait()`方法，
 
-Condition中的`signal()`方法相当于Object的`notify()`方法，
+Condition 中的`signal()`方法相当于 Object 的`notify()`方法，
 
-Condition中的`signalAll()`相当于Object的`notifyAll()`方法。
+Condition 中的`signalAll()`相当于 Object 的`notifyAll()`方法。
 
 不同的是，
 
-Object中的`wait(),notify(),notifyAll()`方法是和`"同步锁"`(synchronized关键字)捆绑使用的；
+Object 中的`wait(),notify(),notifyAll()`方法是和`"同步锁"`(synchronized 关键字)捆绑使用的；
 
-而Condition是需要与`"互斥锁"/"共享锁"`捆绑使用的。
+而 Condition 是需要与`"互斥锁"/"共享锁"`捆绑使用的。
 
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1608629547727-cfd44e4c-031d-402e-9bc2-13917ff0a26e.png)
 
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1608629547815-76a68e07-1e04-4541-a260-ae459240e0b6.png)
 
-![img](https://gitee.com/moomhub/img/raw/master/1608629547727-cfd44e4c-031d-402e-9bc2-13917ff0a26e.png)
+## FutureTask 和 Future
 
+### Future 接口
 
-
-![img](https://gitee.com/moomhub/img/raw/master/1608629547815-76a68e07-1e04-4541-a260-ae459240e0b6.png)
-
-
-
-## FutureTask和Future
-
-### Future接口
-
-Future接口是用来获取异步计算结果的，说白了就是对具体的Runnable或者Callable对象任务执行的结果进行获取(get()),取消(cancel()),判断是否完成等操作。我们看看Future接口的源码：
+Future 接口是用来获取异步计算结果的，说白了就是对具体的 Runnable 或者 Callable 对象任务执行的结果进行获取(get()),取消(cancel()),判断是否完成等操作。我们看看 Future 接口的源码：
 
 ```java
-    public interface Future<V> {  
-        boolean cancel(boolean mayInterruptIfRunning);  
-        boolean isCancelled();  
-        boolean isDone();  
-        V get() throws InterruptedException, ExecutionException;  
-        V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, 			TimeoutException;  
+    public interface Future<V> {
+        boolean cancel(boolean mayInterruptIfRunning);
+        boolean isCancelled();
+        boolean isDone();
+        V get() throws InterruptedException, ExecutionException;
+        V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, 			TimeoutException;
     }
 ```
 
@@ -243,7 +227,7 @@ Future接口是用来获取异步计算结果的，说白了就是对具体的Ru
 
 ```java
 public class FutureExample {
-    
+
     static class MyCallable implements Callable<String> {
         @Override
         public String call() throws Exception {
@@ -263,43 +247,33 @@ public class FutureExample {
 }
 ```
 
-
-
 #### 方法
 
 - **V get()** ：获取异步执行的结果，如果没有结果可用，此方法会阻塞直到异步计算完成。
-- **V get(Long timeout , TimeUnit unit)** ：获取异步执行结果，如果没有结果可用，此方法会阻塞，但是会有时间限制，如果阻塞时间超过设定的timeout时间，该方法将抛出异常。
-- **boolean isDone()** ：如果任务执行结束，无论是正常结束或是中途取消还是发生异常，都返回true。
-- **boolean isCanceller()** ：如果任务完成前被取消，则返回true。
-- **boolean cancel(boolean mayInterruptRunning)** ：如果任务还没开始，执行cancel(...)方法将返回false；如果任务已经启动，执行cancel(true)方法将以中断执行此任务线程的方式来试图停止任务，如果停止成功，返回true；当任务已经启动，执行cancel(false)方法将不会对正在执行的任务线程产生影响(让线程正常执行到完成)，此时返回false；当任务已经完成，执行cancel(...)方法将返回false。mayInterruptRunning参数表示是否中断执行中的线程。
+- **V get(Long timeout , TimeUnit unit)** ：获取异步执行结果，如果没有结果可用，此方法会阻塞，但是会有时间限制，如果阻塞时间超过设定的 timeout 时间，该方法将抛出异常。
+- **boolean isDone()** ：如果任务执行结束，无论是正常结束或是中途取消还是发生异常，都返回 true。
+- **boolean isCanceller()** ：如果任务完成前被取消，则返回 true。
+- **boolean cancel(boolean mayInterruptRunning)** ：如果任务还没开始，执行 cancel(...)方法将返回 false；如果任务已经启动，执行 cancel(true)方法将以中断执行此任务线程的方式来试图停止任务，如果停止成功，返回 true；当任务已经启动，执行 cancel(false)方法将不会对正在执行的任务线程产生影响(让线程正常执行到完成)，此时返回 false；当任务已经完成，执行 cancel(...)方法将返回 false。mayInterruptRunning 参数表示是否中断执行中的线程。
 
-
-
-通过方法分析我们也知道实际上Future提供了3种功能：
+通过方法分析我们也知道实际上 Future 提供了 3 种功能：
 
 （1）能够中断执行中的任务（2）判断任务是否执行完成（3）获取任务执行完成后额结果。
 
-但是我们必须明白Future只是一个接口，我们无法直接创建对象，因此就需要其实现类FutureTask登场啦
+但是我们必须明白 Future 只是一个接口，我们无法直接创建对象，因此就需要其实现类 FutureTask 登场啦
 
 ### FutureTask
 
 #### 概念
 
-FutureTask一个可取消的异步计算，FutureTask 实现了Future的基本方法，提空 start cancel  操作，可以查询计算是否已经完成，并且可以获取计算的结果。结果只可以在计算完成之后获取，get方法会阻塞当计算没有完成的时候，一旦计算已经完成，那么计算就不能再次启动或是取消。
+FutureTask 一个可取消的异步计算，FutureTask 实现了 Future 的基本方法，提空 start cancel 操作，可以查询计算是否已经完成，并且可以获取计算的结果。结果只可以在计算完成之后获取，get 方法会阻塞当计算没有完成的时候，一旦计算已经完成，那么计算就不能再次启动或是取消。
 
-一个FutureTask 可以用来包装一个 Callable 或是一个runnable对象。因为FurtureTask实现了Runnable方法，所以一个 FutureTask可以提交(submit)给一个Excutor执行(excution).
-
-
+一个 FutureTask 可以用来包装一个 Callable 或是一个 runnable 对象。因为 FurtureTask 实现了 Runnable 方法，所以一个 FutureTask 可以提交(submit)给一个 Excutor 执行(excution).
 
 #### 使用场景
 
-FutureTask可用于异步获取执行结果或取消执行任务的场景。通过传入Runnable或者Callable的任务给FutureTask，直接调用其run方法或者放入线程池执行，之后可以在外部通过FutureTask的get方法异步获取执行结果，因此，FutureTask非常适合用于耗时的计算，主线程可以在完成自己的任务后，再去获取结果。另外，FutureTask还可以确保即使调用了多次run方法，它都只会执行一次Runnable或者Callable任务，或者通过cancel取消FutureTask的执行等。
-
-
+FutureTask 可用于异步获取执行结果或取消执行任务的场景。通过传入 Runnable 或者 Callable 的任务给 FutureTask，直接调用其 run 方法或者放入线程池执行，之后可以在外部通过 FutureTask 的 get 方法异步获取执行结果，因此，FutureTask 非常适合用于耗时的计算，主线程可以在完成自己的任务后，再去获取结果。另外，FutureTask 还可以确保即使调用了多次 run 方法，它都只会执行一次 Runnable 或者 Callable 任务，或者通过 cancel 取消 FutureTask 的执行等。
 
 #### 实例
-
-
 
 ```java
 public class FutureTaskExample {
@@ -326,11 +300,7 @@ public class FutureTaskExample {
 }
 ```
 
-
-
-### Fork/Join框架
-
-
+### Fork/Join 框架
 
 实例
 

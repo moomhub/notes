@@ -34,9 +34,9 @@ rejectHandler:当拒绝处理任务时的策略
 
 ### 线程池运行图
 
-![img](https://gitee.com/moomhub/img/raw/master/1608690292663-2a4a6ee2-fb47-4b09-a866-1319f1361c2e.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1608690292663-2a4a6ee2-fb47-4b09-a866-1319f1361c2e.png)
 
-![img](https://gitee.com/moomhub/img/raw/master/1608630719122-9ca95ba8-edcd-499c-8a01-fd5cbf841878.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1608630719122-9ca95ba8-edcd-499c-8a01-fd5cbf841878.png)
 
 ### 方法
 

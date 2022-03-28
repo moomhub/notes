@@ -2,7 +2,7 @@
 
 ## 知识体系
 
-![图片](https://gitee.com/moomhub/img/raw/master/640)
+![图片](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/640)
 
 ## Java 平台 模块系统
 
@@ -33,7 +33,7 @@ module com.mycompany.sample {
 
 ## Jshell
 
-jshell 是 Java 9 新增的一个实用工具。jshell 为 Java 增加了类似 NodeJS 和 Python 中的读取-求值-打印循环（ Read-Evaluation-Print Loop ） 。在 jshell 中 可以直接 输入表达式并查看其执行结果。当需要测试一个方法的运行效果，或是快速的对表达式进行求值时，jshell 都非常实用。只需要通过 jshell 命令启动 jshell，然后直接输入表达式即可。每个表达式的结果会被自动保存下来 ，以数字编号作为引用，类似 和2 这样的名称 。可以在后续的表达式中引用之前语句的运行结果。在 jshell 中 ，除了表达式之外，还可以创建 Java 类和方法。jshell 也有基本的代码完成功能。
+jshell 是 Java 9 新增的一个实用工具。jshell 为 Java 增加了类似 NodeJS 和 Python 中的读取-求值-打印循环（ Read-Evaluation-Print Loop ） 。在 jshell 中 可以直接 输入表达式并查看其执行结果。当需要测试一个方法的运行效果，或是快速的对表达式进行求值时，jshell 都非常实用。只需要通过 jshell 命令启动 jshell，然后直接输入表达式即可。每个表达式的结果会被自动保存下来 ，以数字编号作为引用，类似 和 2 这样的名称 。可以在后续的表达式中引用之前语句的运行结果。在 jshell 中 ，除了表达式之外，还可以创建 Java 类和方法。jshell 也有基本的代码完成功能。
 
 在 如下代码 中，我们直接创建了一个方法 add。
 
@@ -107,7 +107,7 @@ public void testStream() throws Exception {
 
 ## 进程 API
 
-Java 9 增加了 ProcessHandle 接口，可以对原生进程进行管理，尤其适合于管理长时间运行的进程。在使用 ProcessBuilder 来启动一个进程之后，可以通过 Process.toHandle()方法来得到一个 ProcessHandl e 对象的实例。通过 ProcessHandle 可以获取到由 ProcessHandle.Info 表 示的进程的基本信息，如命令行参数、可执行文件路径和启动时间等。ProcessHandle 的 onExit()方法返回一个 CompletableFuture对象，可以在进程结束时执行自定义的动作。如下代码中给出了进程 API 的使用示例。
+Java 9 增加了 ProcessHandle 接口，可以对原生进程进行管理，尤其适合于管理长时间运行的进程。在使用 ProcessBuilder 来启动一个进程之后，可以通过 Process.toHandle()方法来得到一个 ProcessHandl e 对象的实例。通过 ProcessHandle 可以获取到由 ProcessHandle.Info 表 示的进程的基本信息，如命令行参数、可执行文件路径和启动时间等。ProcessHandle 的 onExit()方法返回一个 CompletableFuture 对象，可以在进程结束时执行自定义的动作。如下代码中给出了进程 API 的使用示例。
 
 ```
 final ProcessBuilder processBuilder = new ProcessBuilder("top")
@@ -299,4 +299,3 @@ public interface SayHi {
     }
 }
 ```
-

@@ -2,31 +2,27 @@
 
 ## 主要概念
 
-新零售包含：线上--线下 
+新零售包含：线上--线下
 
 SPU：产品表
 
 SKU：商品信息
 
-## SKU与权重
+## SKU 与权重
 
 > 淘宝网的权重，修改商品标题会导致改商品权重下降
 
-新零售平台主要是B2C的，所以修改SKU对权重的影响不大。但是B2B的平台，修改SKU对商品权重影响很大。
+新零售平台主要是 B2C 的，所以修改 SKU 对权重的影响不大。但是 B2B 的平台，修改 SKU 对商品权重影响很大。
 
 ## 相关设计关系图
 
 ### 品类和参数绑定
 
-![image-20210922101420858](https://gitee.com/moomhub/img/raw/master/image-20210922101420858.png)
+![image-20210922101420858](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210922101420858.png)
 
-### 参数和SKU(商品)关系
+### 参数和 SKU(商品)关系
 
-![image-20210922101458402](https://gitee.com/moomhub/img/raw/master/image-20210922101458402.png)
-
-
-
-
+![image-20210922101458402](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210922101458402.png)
 
 ```mysql
 create database neti;
@@ -42,7 +38,7 @@ CREATE TABLE t_spec_group(
 )COMMENT="品类表"
 
 CREATE TABLE t_spec_param(
-id VARCHAR(32) PRIMARY KEY  COMMENT "主键", 
+id VARCHAR(32) PRIMARY KEY  COMMENT "主键",
 spg_id VARCHAR(32) NOT NULL COMMENT "品类编号",
 spp_id VARCHAR(32) NOT NULL COMMENT "参数编号",
 `name` VARCHAR( 280) NOT NULL COMMENT "参数名称",
@@ -67,7 +63,7 @@ CREATE TABLE `t_brand` (
 
 
 CREATE TABLE t_category(
-id VARCHAR(32) PRIMARY KEY  COMMENT "主键", 	
+id VARCHAR(32) PRIMARY KEY  COMMENT "主键",
 `name` VARCHAR( 280) NOT NULL COMMENT "分类名称",
 parent_id VARCHAR(32) COMMENT "上级分类菜单",
 if_parent BOOLEAN NOT NULL COMMENT "是否含有下级分类",
@@ -106,22 +102,12 @@ CREATE TABLE t_spu(
 
 ```
 
-
-
 ## 订单号和流水号的区别
 
 订单号：订单的唯一编号， 而且经常被用来检索，所以应当是数字类型的主键
 流水号：打印在购物单据上的字符串，便于阅读，但是不用做查询
 
-![image-20220318141429800](https://gitee.com/moomhub/img/raw/master/image-20220318141429800.png)
-
-
-
-
-
-
-
-
+![image-20220318141429800](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20220318141429800.png)
 
 ## 商品秒杀业务
 
@@ -131,31 +117,27 @@ CREATE TABLE t_spu(
 
 ### 数据库事务隔离级别 Serializable
 
-
-
-![image-20210914110223115](https://gitee.com/moomhub/img/raw/master/image-20210914110223115.png)
+![image-20210914110223115](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210914110223115.png)
 
 ### 乐观锁
 
-![image-20210914110358000](https://gitee.com/moomhub/img/raw/master/image-20210914110358000.png)
+![image-20210914110358000](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210914110358000.png)
 
-### 使用redis库存
+### 使用 redis 库存
 
-#### Redis中的超售现象
+#### Redis 中的超售现象
 
-因为Redis的单线程是非阻塞执行的，所以并发修改数据容易产生超售的结果
+因为 Redis 的单线程是非阻塞执行的，所以并发修改数据容易产生超售的结果
 
-#### 使用redis事务解决redis 超售
+#### 使用 redis 事务解决 redis 超售
 
-Redis引入了事务机制(批处理)，一次性把多条命令传递给Redis执行，这就避免了其他客户端中间插队，出现超售的现象。
+Redis 引入了事务机制(批处理)，一次性把多条命令传递给 Redis 执行，这就避免了其他客户端中间插队，出现超售的现象。
 
-![image-20210914112149311](https://gitee.com/moomhub/img/raw/master/image-20210914112149311.png)
-
-
+![image-20210914112149311](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210914112149311.png)
 
 #### 如何保持事务一致性?
 
-为了保证事务的一致性，在开启事务之前必须要用WATCH命令监视要操作的记录。
+为了保证事务的一致性，在开启事务之前必须要用 WATCH 命令监视要操作的记录。
 redis > WATCH kill_num kill_user
 
 ```
@@ -174,7 +156,7 @@ redis > RPUSH kill_user 9502
 redis > EXEC
 
 
-#Spring boot 
+#Spring boot
 
 List<Object> txResults = redisTemplate.execute(new SessionCallback<List<Object>>() {
   public List<Object> execute(RedisOperations operations) throws DataAccessException {
@@ -187,35 +169,29 @@ List<Object> txResults = redisTemplate.execute(new SessionCallback<List<Object>>
 
 ```
 
-
-
 ## 数据库解决购物纠纷
 
 ### 如何避免篡改商品信息?
 
-B2B电商平：通常采用保存历次商品修改信息、降低搜索排名
-B2C电商平台：只需要保存历次商品修改信息即可
+B2B 电商平：通常采用保存历次商品修改信息、降低搜索排名
+B2C 电商平台：只需要保存历次商品修改信息即可
 
-> 所有数据表老数据数据归档处理，定期将数据库中的逻辑删除的 
+> 所有数据表老数据数据归档处理，定期将数据库中的逻辑删除的
 
-新增SPU和SKU old老数据库记录在案
+新增 SPU 和 SKU old 老数据库记录在案
 
+## 防止 XSS 攻击
 
-
-## 防止XSS攻击
-
-
-
-XSS(跨站脚本)攻击，是让浏览器渲染DOM的时候意外的执行了恶意JS代码
-XSS攻击的原理是在网页中嵌入一个恶意脚本
+XSS(跨站脚本)攻击，是让浏览器渲染 DOM 的时候意外的执行了恶意 JS 代码
+XSS 攻击的原理是在网页中嵌入一个恶意脚本
 
 ```html
-<img src="null" onerror='alert( document.cookie)'/>
+<img src="null" onerror="alert( document.cookie)" />
 ```
 
 ### AntiSamy
 
-AntiSamy是开源的Java类库，可以用来过滤XSS恶意代码
+AntiSamy 是开源的 Java 类库，可以用来过滤 XSS 恶意代码
 
 ```xml
 <dependency>
@@ -224,8 +200,6 @@ AntiSamy是开源的Java类库，可以用来过滤XSS恶意代码
 	<version>1.5.5</version>
 </dependency>
 ```
-
-
 
 ```java
 public class Demo {
@@ -236,7 +210,7 @@ public class Demo {
           Policy policy=Policy.getInstance(path);
           Antisamy samy=new AntiSamy();
 		  String result=samy.scan(temp, policy).getcleanHTML();
-          System.out.println(result); 
+          System.out.println(result);
        }
     }
 }
@@ -244,7 +218,7 @@ public class Demo {
 
 ### Jsoup（推荐使用）
 
-使用Jsoup防止富文本 XSS 攻击
+使用 Jsoup 防止富文本 XSS 攻击
 
 ## 订单号和流水号
 
@@ -253,24 +227,14 @@ public class Demo {
 - 订单号既是订单的唯一编号， 而且经常被用来检索，所以应当是数字类型的主键
 - 流水号是打印在购物单据上的字符串，便于阅读，但是不用做查询
 
-
-
-![image-20210913175450421](https://gitee.com/moomhub/img/raw/master/image-20210913175450421.png)
-
-
-
-
+![image-20210913175450421](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210913175450421.png)
 
 数据库缓存和程序缓存
 
-
-
-![image-20210915104205886](https://gitee.com/moomhub/img/raw/master/image-20210915104205886.png)
-
-
+![image-20210915104205886](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20210915104205886.png)
 
 中文分词
 
-Lucene  Apache 分词技术
+Lucene Apache 分词技术
 
-[HanLP官网](https://www.hanlp.com/index.html)
+[HanLP 官网](https://www.hanlp.com/index.html)

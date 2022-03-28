@@ -2,16 +2,15 @@
 
 ## MyCat 安装和配置
 
-> Mycat集群解决方案
+> Mycat 集群解决方案
 
-![image-20200924104156260](https://gitee.com/moomhub/img/raw/master/QtrzJfdehqGElxb.png)
+![image-20200924104156260](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/QtrzJfdehqGElxb.png)
 
 ### 1、MyCat 安装（Linux）
 
 #### 1.1、Java 环境安装
 
-Linux 软件下载地址：链接:   http://caiyun.feixin.10086.cn/dl/105CpmHq3NuN8    提取码:B7JT
-
+Linux 软件下载地址：链接: http://caiyun.feixin.10086.cn/dl/105CpmHq3NuN8 提取码:B7JT
 
 1. 创建 JAVA 目录
 
@@ -22,16 +21,11 @@ Linux 软件下载地址：链接:   http://caiyun.feixin.10086.cn/dl/105CpmHq3N
    cd /usr/local/java
    ```
 
-   
-
 2. 把下载的文件放在/usr/local/java/目录下，然后解压。
 
    ```shell
    tar -zxvf jdk-8u151-linux-x64.tar.gz
    ```
-
-
-
 
 #### 1.2、MyCat 安装
 
@@ -52,7 +46,7 @@ su - mycat
 ls -lh
 ```
 
-#### 1.3、MyCat 和java 环境配置
+#### 1.3、MyCat 和 java 环境配置
 
 修改 **vi /etc/profile**
 
@@ -61,8 +55,8 @@ ls -lh
 ```sh
 # JAVA_HOME
 set java environment
-JAVA_HOME=/usr/local/java/jdk1.8  
-JRE_HOME=/usr/local/java/jdk1.8/jre     
+JAVA_HOME=/usr/local/java/jdk1.8
+JRE_HOME=/usr/local/java/jdk1.8/jre
 CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
 export JAVA_HOME JRE_HOME CLASS_PATH PATH
 #Mycat_HOME
@@ -73,7 +67,7 @@ PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$MYCAT_HOME/bin
 # By default, we want umask to get set. This sets it for login shell
 ```
 
-注意：其中 JAVA_HOME， JRE_HOME 和MYCAT_HOME 请根据自己的实际安装路径及 JDK 版本配置。
+注意：其中 JAVA_HOME， JRE_HOME 和 MYCAT_HOME 请根据自己的实际安装路径及 JDK 版本配置。
 
 ```shell
 # 让修改生效
@@ -82,11 +76,11 @@ source /etc/profile
 java -version
 ```
 
-### 2、MyCat安装（Docker）
+### 2、MyCat 安装（Docker）
 
-#### 1、编写Dockerfile 构建Mycat镜像
+#### 1、编写 Dockerfile 构建 Mycat 镜像
 
-下载Mycat 安装包和拉取openjdk 8的环境然后编写下面的内容
+下载 Mycat 安装包和拉取 openjdk 8 的环境然后编写下面的内容
 
 ```sh
 docker pull openjdk:8
@@ -101,7 +95,7 @@ EXPOSE 8066 9066
 CMD ["/usr/local/mycat/bin/mycat", "console","&"]
 ```
 
-然后在Linux命令行中输入
+然后在 Linux 命令行中输入
 
 > 后面有一个点不要忘记了
 
@@ -109,9 +103,9 @@ CMD ["/usr/local/mycat/bin/mycat", "console","&"]
 docker build -t mycat-1.6.7.4 .
 ```
 
-#### 2、运行docker 容器
+#### 2、运行 docker 容器
 
-把Mycat包conf文件目录下载复制到本地将要映射的文件，不然会启动失败
+把 Mycat 包 conf 文件目录下载复制到本地将要映射的文件，不然会启动失败
 
 ```sh
 docker run -d --name mycat1 \
@@ -129,24 +123,22 @@ docker run -d --name mycat2 \
 mycat-1.6.7.4:latest
 ```
 
-然后修改配置完成对PXC 的配置
+然后修改配置完成对 PXC 的配置
 
 ### 3、可能会遇见的问题的
 
-mycat 运行失败 可能是内存不足的原因停掉某些不必要的docker 服务
+mycat 运行失败 可能是内存不足的原因停掉某些不必要的 docker 服务
 
 修改**Server.xml**文件
 
+## Mycat 初始配置
 
-
-## Mycat初始配置
-
-修改conf/wrapper.conf文件
+修改 conf/wrapper.conf 文件
 
 ```nginx
 vi conf/wrapper.conf
 
-# Java Application 
+# Java Application
 wrapper.java.command-/usr/local/java/idk1.8/bin/iava # 设置为Java 路径下的地址
 wrapper.working.dir=..
 
@@ -156,23 +148,21 @@ wrapper.java.additional.10=-Xmx256M
 wrapper.java.additional.11=-Xms256M
 ```
 
-
-
 ### Mycat 设置为开机启动
 
 制作 /etc/init.d/mycat
 
-### 设置Mycat软路由
+### 设置 Mycat 软路由
 
 ```shell
  ln -s /usr/local/mycat/bin/mycat /etc/init.d/mycat
 ```
 
-成功后就可以使用命令参考：**service mycat start | stop | restart |  console**
+成功后就可以使用命令参考：**service mycat start | stop | restart | console**
 
 service mycat start 启动查看效果，结果能正常启动了
 
-![img](https://gitee.com/moomhub/img/raw/master/20191116121127936.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/20191116121127936.png)
 
 ### 设置开机自启
 
@@ -182,15 +172,15 @@ chkconfig --add mycat 加入开机服务
 chkconfig --add mycat
 ```
 
- 重启查看效果
+重启查看效果
 
-![img](https://gitee.com/moomhub/img/raw/master/20191116121143883.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/20191116121143883.png)
 
 ### 脚本开机启动
 
-1. 修改脚本文件rc.local：vim /etc/rc.d/rc.local
+1. 修改脚本文件 rc.local：vim /etc/rc.d/rc.local
 
-　　这个脚本是使用者自定的开机启动程序，可以在里面添加想在系统启动之后执行的脚本或者脚本执行命令
+这个脚本是使用者自定的开机启动程序，可以在里面添加想在系统启动之后执行的脚本或者脚本执行命令
 
 2. 添加如下内容：
 
@@ -201,19 +191,19 @@ chkconfig --add mycat
 
 3. esc 退出编辑，:wq 保存修改
 
-4. 将rc.local修改为可执行
+4. 将 rc.local 修改为可执行
 
    ```sh
    chmod 777 /etc/rc.d/rc.local
    ```
 
-## Mycat 连接 SQL 8(默认的是5)
+## Mycat 连接 SQL 8(默认的是 5)
 
-修改Mycat 中的连接数据库的jar包 
+修改 Mycat 中的连接数据库的 jar 包
 
 jar 包下载地址 https://mvnrepository.com/artifact/mysql/mysql-connector-java
 
-把  mysql-connector-java-5.1.35.jar 替换成mysql 8的安装包
+把 mysql-connector-java-5.1.35.jar 替换成 mysql 8 的安装包
 
 同时 **schema.xml** 中连接方式要变成如下配置
 
@@ -231,17 +221,13 @@ jar 包下载地址 https://mvnrepository.com/artifact/mysql/mysql-connector-jav
 </dataHost>
 ```
 
-
-
-
-
 ## MyCat 配置文件解析
 
-MYCAT的关键配置文件
+MYCAT 的关键配置文件
 
-1. schema.xml用于配置逻辑库表及数据节点
-2. rule.xml用于配置表的分片规则
-3. server.xml用于配置服务器权限
+1. schema.xml 用于配置逻辑库表及数据节点
+2. rule.xml 用于配置表的分片规则
+3. server.xml 用于配置服务器权限
 
 ### schema.xml
 
@@ -268,7 +254,7 @@ MYCAT的关键配置文件
 定义表使用的分片规则
 
 ```xml
-<tableRule name= ""></tableRule> 
+<tableRule name= ""></tableRule>
 ```
 
 定义分片算法
@@ -282,20 +268,18 @@ MYCAT的关键配置文件
 用于定义系统配置
 
 ```xml
-<system> <property name= ""></property> </system> 
+<system> <property name= ""></property> </system>
 ```
 
-用于定义连接MyCAT的用户
+用于定义连接 MyCAT 的用户
 
 ```xml
 <user></user>
 ```
 
-Mycat Server使用
+Mycat Server 使用
 
-
-
-## Mycat数据切分
+## Mycat 数据切分
 
 数据切分算法
 
@@ -306,20 +290,16 @@ Mycat Server使用
 | 主键范围切分 | 数据快速增长，容易增加分片   | 有明确主键值 |
 | 日期切分     | 数据快速增长，容易增加分片   |              |
 
-
-
 主键求模切分
 求模切分适合用在初始数据很大，但是数据增长不快的场景
-行政企业  地图产品  数据数据
+行政企业 地图产品 数据数据
 
 主键求模切分 （可以根据主键来进行不同数据来进行分片保持）
 求模切分的弊病在于扩展新分片难度大，迁移的数据太多
 
-PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
+PXC1 121 122 123 （分片一） PXC2 151 159 215 （分片二）
 
-
-
-![image-20200924102323872](https://gitee.com/moomhub/img/raw/master/uKvUxtDn7mWyC6M.png)
+![image-20200924102323872](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/uKvUxtDn7mWyC6M.png)
 
 ```xml
 <schema name="test" checksQLschema="false" sqlMaxLimit="100">
@@ -331,10 +311,6 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 </ schema>
 ```
 
-
-
-
-
 ## Mycat 默认文件内容
 
 ### Server.xml
@@ -345,7 +321,7 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 <mycat:server xmlns:mycat="http://io.mycat/">
 	<system>
      <!-- 0为需要密码登陆、1为不需要密码登陆 ,默认为0，设置为1则需要指定默认账户-->
-	<property name="nonePasswordLogin">0</property> 
+	<property name="nonePasswordLogin">0</property>
      <!-- 0遇上没有实现的报文(Unknown command:),就会报错、1为忽略该报文，返回ok报文。
 	在某些mysql客户端存在客户端已经登录的时候还会继续发送登录报文,mycat会报错,该设置可以绕过这个错误-->
 	<property name="ignoreUnknownCommand">0</property>
@@ -365,9 +341,9 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
       <!--  <property name="useCompression">1</property>--> <!--1为开启mysql压缩协议-->
         <!--  <property name="fakeMySQLVersion">5.6.20</property>--> <!--设置模拟的MySQL版本号-->
 	<!-- <property name="processorBufferChunk">40960</property> -->
-	<!-- 
+	<!--
 	<property name="processors">1</property> //mycat进程数量
-	<property name="processorExecutor">32</property> 
+	<property name="processorExecutor">32</property>
 	 -->
         <!--默认为type 0: DirectByteBufferPool | type 1 ByteBufferArena | type 2 NettyBufferPool -->
 		<property name="processorBufferPoolType">0</property>
@@ -379,7 +355,7 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 		<!--<property name="processorExecutor">16</property>-->
 		<!--
 			<property name="serverPort">8066</property>
-			<property name="managerPort">9066</property> 
+			<property name="managerPort">9066</property>
 			<property name="idleTimeout">300000</property> // 连接mysql超时(毫秒)
 			<property name="bindIp">0.0.0.0</property> //监听IP
 			<property name="dataNodeIdleCheckPeriod">300000</property>//5 * 60 * 1000L; //连接空闲检查
@@ -409,7 +385,7 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 		<!--如果为0的话,涉及多个DataNode的catlet任务不会跨线程执行-->
 		<property name="parallExecute">0</property>
 	</system>
-	
+
 	<!-- 全局SQL防火墙设置 -->
 	<!--白名单可以使用通配符%或着*-->
 	<!--例如<host host="127.0.0.*" user="root"/>-->
@@ -432,15 +408,15 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 		<property name="schemas">TESTDB</property>
 		<property name="defaultSchema">TESTDB</property>
 		<!--No MyCAT Database selected 错误前会尝试使用该schema作为schema，不设置则为null,报错 -->
-		
+
 		<!-- 表级 DML 权限设置 -->
-		<!-- 		
+		<!--
 		<privileges check="false">
 			<schema name="TESTDB" dml="0110" >
 				<table name="tb01" dml="0000"></table>
 				<table name="tb02" dml="1111"></table>
 			</schema>
-		</privileges>		
+		</privileges>
 		 -->
 	</user>
 
@@ -454,6 +430,3 @@ PXC1  121 122 123   （分片一）     PXC2    151 159 215 （分片二）
 </mycat:server>
 
 ```
-
-  
-

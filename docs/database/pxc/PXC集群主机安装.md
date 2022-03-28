@@ -1,25 +1,21 @@
-# PXC集群安装
+# PXC 集群安装
 
-
-
-> PXC是基于Percona 而来的
+> PXC 是基于 Percona 而来的
 >
-> PXC集群只支持InnoDB引擎只有InnoDB引擎的数据才会被同步
+> PXC 集群只支持 InnoDB 引擎只有 InnoDB 引擎的数据才会被同步
 
-**PXC集群要使用四个端口,所以防火墙要放行这些端口端口描述**
+**PXC 集群要使用四个端口,所以防火墙要放行这些端口端口描述**
 
 | 端口 |          描述          |
 | :--: | :--------------------: |
-| 3306 |     MySQL服务端口      |
+| 3306 |     MySQL 服务端口     |
 | 4444 | 请求全量同步(SST)端口  |
 | 4567 | 数据库节点之间通信端口 |
 | 4568 | 请求增量同步(IST)端口  |
 
-
-
 ## 1、Linux 主机安装
 
-### 1. 删除MariaDB程序包
+### 1. 删除 MariaDB 程序包
 
 ```shell
 yum -y remove mari*
@@ -34,33 +30,33 @@ firewall-cmd --zone=public --add-port=4567/tcp --permanent
 firewall-cmd --zone=public --add-port=4568/tcp --permanent
 ```
 
-### 3. 关闭SELINUX
+### 3. 关闭 SELINUX
 
 ```shell
 vi /etc/selinux/config
 ```
 
-把SELINUX属性值设置成disabled
+把 SELINUX 属性值设置成 disabled
 
 ```shell
 reboot
 ```
 
-### 4. 离线安装PXC
+### 4. 离线安装 PXC
 
-* 进入RPM文件目录，执行安装命令
+- 进入 RPM 文件目录，执行安装命令
 
   ```shell
   yum localinstall *.rpm
   ```
 
-* 参考第一章内容，修改MySQL配置文件、创建账户等操作
+- 参考第一章内容，修改 MySQL 配置文件、创建账户等操作
 
-### 5. 创建PXC集群
+### 5. 创建 PXC 集群
 
-* 停止MySQL服务
+- 停止 MySQL 服务
 
-* 修改每个PXC节点的/etc/my.cnf文件（在不同节点上，注意调整文件内容）
+- 修改每个 PXC 节点的/etc/my.cnf 文件（在不同节点上，注意调整文件内容）
 
   ```ini
   server-id=1  #PXC集群中MySQL实例的唯一ID，不能重复，必须是数字
@@ -77,7 +73,7 @@ reboot
   innodb_autoinc_lock_mode=2  #主键自增长不锁表
   ```
 
-* 主节点的管理命令（第一个启动的PXC节点）
+- 主节点的管理命令（第一个启动的 PXC 节点）
 
   ```shell
   systemctl start mysql@bootstrap.service
@@ -85,7 +81,7 @@ reboot
   systemctl restart mysql@bootstrap.service
   ```
 
-* 非主节点的管理命令（非第一个启动的PXC节点）
+- 非主节点的管理命令（非第一个启动的 PXC 节点）
 
   ```shell
   service start mysql
@@ -93,24 +89,24 @@ reboot
   service restart mysql
   ```
 
-* 查看PXC集群状态信息
+- 查看 PXC 集群状态信息
 
   ```mysql
   show status like 'wsrep_cluster%' ;
   ```
 
-* **按照上述配置方法，创建两组PXC集群**
+- **按照上述配置方法，创建两组 PXC 集群**
 
-### 6. PXC节点启动与关闭
+### 6. PXC 节点启动与关闭
 
-* 如果最后关闭的PXC节点是安全退出的，那么下次启动要最先启动这个节点，而且要以主节点启动
-* 如果最后关闭的PXC节点不是安全退出的，那么要先修改`/var/lib/mysql/grastate.dat` 文件，把其中的`safe_to_bootstrap`属性值设置为1，再安装主节点启动
+- 如果最后关闭的 PXC 节点是安全退出的，那么下次启动要最先启动这个节点，而且要以主节点启动
+- 如果最后关闭的 PXC 节点不是安全退出的，那么要先修改`/var/lib/mysql/grastate.dat` 文件，把其中的`safe_to_bootstrap`属性值设置为 1，再安装主节点启动
 
 ## 2、Docker 安装
 
 ### 1.拉取镜像
 
-在docker中选择你要拉取的镜像 https://registry.hub.docker.com/r/percona/percona-xtradb-cluster
+在 docker 中选择你要拉取的镜像 https://registry.hub.docker.com/r/percona/percona-xtradb-cluster
 
 ```sh
 docker pull percona/percona-xtradb-cluster:5.7.30-31.43
@@ -121,13 +117,13 @@ docker pull percona/percona-xtradb-cluster:8.0.19-10.1
 
 名称解释
 
-| 名称                | 解释           |
-| ------------------- | -------------- |
-| MYSQL_ROOT_PASSWORD | 数据库root密码 |
-| CLUSTER_NAME        | 集群名称       |
-| CLUSTER_JOIN        | 加入的节点     |
+| 名称                | 解释             |
+| ------------------- | ---------------- |
+| MYSQL_ROOT_PASSWORD | 数据库 root 密码 |
+| CLUSTER_NAME        | 集群名称         |
+| CLUSTER_JOIN        | 加入的节点       |
 
-> 一定要先创建并开启节点1不然之后节点会报错 
+> 一定要先创建并开启节点 1 不然之后节点会报错
 
 直接按照顺序输入如下命令
 
@@ -158,7 +154,7 @@ percona/percona-xtradb-cluster:5.7.30-31.43
 
 ### 3.挂载配置文件版（推荐）5.7 .30 版本
 
-新建三个PXC 的目录用于存放相关的配置文件和数据
+新建三个 PXC 的目录用于存放相关的配置文件和数据
 
 ```sh
 # 创建相关文件
@@ -167,7 +163,7 @@ cd /opt/docker/pxc-server
 mkdir pxc1 pxc2 pxc3
 mkdir pxc1/mysql pxc2/mysql pxc3/mysql
 # 创建配置文件 每一个都要不一样
-vi pxc1/my.cnf 
+vi pxc1/my.cnf
 cp /opt/docker/pxc-server/pxc1/my.cnf /opt/docker/pxc-server/pxc2/my.cnf
 cp /opt/docker/pxc-server/pxc1/my.cnf /opt/docker/pxc-server/pxc3/my.cnf
 # 修改文件夹权限
@@ -230,7 +226,7 @@ innodb_buffer_pool_size= 200M
 # pxc-encrypt-cluster-traffic=OFF
 ```
 
-运行docker 容器
+运行 docker 容器
 
 ```sh
 docker run -d --name pxc1 \
@@ -277,10 +273,6 @@ percona/percona-xtradb-cluster:5.7.30-31.43
 ```mysql
 show status like 'wsrep_cluster%';
 ```
-
-
-
-
 
 ```sh
 
@@ -371,20 +363,18 @@ socket=/tmp/mysql.sock
 progress=/var/lib/mysql/sst_in_progresss
 ```
 
-PXC集群管理
+PXC 集群管理
 
-PXC集群信息
+PXC 集群信息
 
-PXC集群信息可以分为以下几类:
+PXC 集群信息可以分为以下几类:
 
-队列    复制    流控    事物    状态
+队列 复制 流控 事物 状态
 https://www.percona.com/doc/percona-xtradb-cluster/LATEST/wsrep-status-index.html
-
-
 
 ## 3、PXC 参数说明
 
-PXC数据复制相关的信息
+PXC 数据复制相关的信息
 
 | 参数                   | 说明                           |
 | ---------------------- | ------------------------------ |
@@ -395,7 +385,7 @@ PXC数据复制相关的信息
 | wsrep_received         | 从其他节点处收到的写入请求总数 |
 | wsrep_received_bytes   | 从其他节点处收到的同步数据总数 |
 
-PXC队列的相关信息
+PXC 队列的相关信息
 
 | 参数                           | 说明               |
 | ------------------------------ | ------------------ |
@@ -408,46 +398,38 @@ PXC队列的相关信息
 | wsrep_local_recv_queue_min     | 接收队列的最小长度 |
 | **wsrep_local_recv_queue_avg** | 接收队列的平均长度 |
 
-
-
 流量控制的相关信息
 
-| 参数                          | 说明                                                         |
-| ----------------------------- | ------------------------------------------------------------ |
-| wsrep_flow_control_paused_ns  | 流控暂停状态下花费的总时间（纳秒)                            |
-| **wsrep_flow_control_paused** | 流量控制暂停时间的占比(0~1)                                  |
-| **wsrep_flow_control_sent**   | 发送的流控暂停事件的数量                                     |
-| **wsrep_flow_control_recv**   | 接收的流控暂停事件的数量                                     |
+| 参数                          | 说明                                                                                                                                                |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| wsrep_flow_control_paused_ns  | 流控暂停状态下花费的总时间（纳秒)                                                                                                                   |
+| **wsrep_flow_control_paused** | 流量控制暂停时间的占比(0~1)                                                                                                                         |
+| **wsrep_flow_control_sent**   | 发送的流控暂停事件的数量                                                                                                                            |
+| **wsrep_flow_control_recv**   | 接收的流控暂停事件的数量                                                                                                                            |
 | wsrep_flow_control_interval   | 流量控制的下限和上限。上限是队列中允许的最大请求数。如果队列达到上限，则拒绝新的请求。当处理现有请求时，队列会减少，—旦到达下限，将再次允许新的请求 |
-| **wsrep_flow_control_status** | 流量控制状态                                                 |
-
-
-
-
-
+| **wsrep_flow_control_status** | 流量控制状态                                                                                                                                        |
 
 PXC 状态管理
 
-PXC节点状态
+PXC 节点状态
 
-![image-20200922155642505](https://gitee.com/moomhub/img/raw/master/Fl1VTmzCt7EePHJ.png)
+![image-20200922155642505](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/Fl1VTmzCt7EePHJ.png)
 
-PXC集群状态
+PXC 集群状态
 
-![image-20200922155721122](https://gitee.com/moomhub/img/raw/master/85Z6MenauvrlJtY.png)
+![image-20200922155721122](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/85Z6MenauvrlJtY.png)
 
 节点与集群的相关信息
 
-| 参数                      | 描述                                                         |
-| ------------------------- | ------------------------------------------------------------ |
-| wsrep_local_state_comment | 节点状态                                                     |
+| 参数                      | 描述                                                                       |
+| ------------------------- | -------------------------------------------------------------------------- |
+| wsrep_local_state_comment | 节点状态                                                                   |
 | wsrep_cluster_status      | 集群状态(PRIMARY（正常状态）、NON_PRIMARY（脑裂）、Disconnected（未连接）) |
-| wsrep_connected           | 节点是否连接到集群                                           |
-| wsrep_ready               | 集群是否正常工作                                             |
-| wsrep_cluster_size        | 节点数量                                                     |
-| wsrep_desync_count        | 延时节点数量                                                 |
-| wsrep_incoming_addresses  | 集群节点IP地址                                               |
-
+| wsrep_connected           | 节点是否连接到集群                                                         |
+| wsrep_ready               | 集群是否正常工作                                                           |
+| wsrep_cluster_size        | 节点数量                                                                   |
+| wsrep_desync_count        | 延时节点数量                                                               |
+| wsrep_incoming_addresses  | 集群节点 IP 地址                                                           |
 
 事务的相关信息
 
@@ -461,11 +443,9 @@ PXC集群状态
 | wsrep_commit_oool        | 无任何意义(不存在本地乱序提交) |
 | wsrep_commit_window      | 发送队列中事务的平均数量       |
 
+## 4、PXC 节点上线和下线操作（安装环境下）
 
-
-## 4、PXC节点上线和下线操作（安装环境下）
-
-如果PXC节点都是安全退出的，先要启动最后退出的节点
+如果 PXC 节点都是安全退出的，先要启动最后退出的节点
 
 ```sh
 # 最后关闭的节点先启动
@@ -479,7 +459,7 @@ cat /var/lib/mysql/grastate.dat
 safe_to_bootstrap: 1 设置为1 (默认是0）
 ```
 
-## 5、Mysql常用的中间件 
+## 5、Mysql 常用的中间件
 
 ```
 MyCat （推荐）
@@ -487,6 +467,3 @@ Atlas
 OneProxy
 Proxy SQL
 ```
-
-
-

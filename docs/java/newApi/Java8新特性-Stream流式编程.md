@@ -1,4 +1,4 @@
-# Java8 新特性-Stream流式编程
+# Java8 新特性-Stream 流式编程
 
 ## Stream
 
@@ -15,7 +15,7 @@ List <Person> people = list.parallelStream().collect(Collectors.toList());
 
 顾名思义，当使用顺序方式去遍历时，每个 item 读完后再读下一个 item。而使用并行去遍历时，数组会被分成多个段，其中每一个都在不同的线程中处理，然后将结果一起输出。
 
-## 常用Stream语句
+## 常用 Stream 语句
 
 ```java
 // 查询是否存在该数据
@@ -23,19 +23,15 @@ InquiryName.stream().filter(name-> name.equals(carShop.getCreateTime()))
                             .findAny().isPresent()
 ```
 
-
-
 ## 示例图
 
-![img](https://gitee.com/moomhub/img/raw/master/1615098552171-ab089d21-7c4a-4b80-8911-8aa56d4242a9.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1615098552171-ab089d21-7c4a-4b80-8911-8aa56d4242a9.png)
 
 分类
 
-![img](https://gitee.com/moomhub/img/raw/master/1615098560970-178456de-83f3-4d22-a8f6-ef7893731ea8.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1615098560970-178456de-83f3-4d22-a8f6-ef7893731ea8.png)
 
-
-
-## Stream流的使用
+## Stream 流的使用
 
 | 中间操作（无状态) | 中间操作（有状态) | 终端操作（短路)       | 终端操作（非短路）         |
 | ----------------- | ----------------- | --------------------- | -------------------------- |
@@ -45,11 +41,7 @@ InquiryName.stream().filter(name-> name.equals(carShop.getCreateTime()))
 | 遍历( peek )      | 排序( sorted )    | 查找首个( findFirst ) | 计数( count )              |
 | null              | null              | 查找任意（ findAny )  | 聚合( collect )            |
 
-
-
-## Stream收集器
-
-
+## Stream 收集器
 
 1、将流中的元素累积成一个结果
 
@@ -57,15 +49,11 @@ InquiryName.stream().filter(name-> name.equals(carShop.getCreateTime()))
 
 3、**collect / Collector / Collectors**
 
-
-
 ## Collectors API
-
-
 
 ### 1、toCollection
 
-将流中的元素全部放置到一个集合中返回，这里使用Collection，泛指多种集合\
+将流中的元素全部放置到一个集合中返回，这里使用 Collection，泛指多种集合\
 
 ```java
 public class CollectorsTest {
@@ -81,15 +69,15 @@ public class CollectorsTest {
 
 ### 2、toList
 
-将流中的元素放置到一个列表集合中去。这个列表默认为ArrayList。
+将流中的元素放置到一个列表集合中去。这个列表默认为 ArrayList。
 
 ### 3、toSet
 
-将流中的元素放置到一个无序集set中去。默认为HashSet。
+将流中的元素放置到一个无序集 set 中去。默认为 HashSet。
 
 ### 4、joining
 
-joining的目的是将流中的元素全部以字符序列的方式连接到一起，可以指定连接符，甚至是结果的前后缀。
+joining 的目的是将流中的元素全部以字符序列的方式连接到一起，可以指定连接符，甚至是结果的前后缀。
 
 ```java
 public class CollectorsTest {
@@ -111,11 +99,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 5、mapping
 
-这个映射是首先对流中的每个元素进行映射，即类型转换，然后再将新元素以给定的Collector进行归纳。
+这个映射是首先对流中的每个元素进行映射，即类型转换，然后再将新元素以给定的 Collector 进行归纳。
 
 ```java
 //将 List<String> 转成 List<Integer>
@@ -130,13 +116,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 6、collectingAndThen
 
 该方法是在归纳动作结束之后，对归纳的结果进行再处理。
-
-
 
 ```java
 public class CollectorsTest {
@@ -151,13 +133,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 7、counting
 
 该方法用于计数。
-
-
 
 ```java
 public class CollectorsTest {
@@ -172,13 +150,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 8、minBy/maxBy
 
-生成一个用于获取最小/最大值的Optional结果的Collector。
-
-
+生成一个用于获取最小/最大值的 Optional 结果的 Collector。
 
 ```java
 public class CollectorsTest {
@@ -193,15 +167,11 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 9、summingInt/summingLong/summingDouble
 
-生成一个用于求元素和的Collector，首先通过给定的mapper将元素转换类型，然后再求和。
+生成一个用于求元素和的 Collector，首先通过给定的 mapper 将元素转换类型，然后再求和。
 
 参数的作用就是将元素转换为指定的类型，最后结果与转换后类型一致。
-
-
 
 ```java
 public class CollectorsTest {
@@ -218,13 +188,11 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 10、averagingInt/averagingLong/averagingDouble
 
-生成一个用于求元素平均值的Collector，首选通过参数将元素转换为指定的类型。
+生成一个用于求元素平均值的 Collector，首选通过参数将元素转换为指定的类型。
 
-参数的作用就是将元素转换为指定的类型，求平均值涉及到除法操作，结果一律为Double类型。
+参数的作用就是将元素转换为指定的类型，求平均值涉及到除法操作，结果一律为 Double 类型。
 
 ```java
 public class CollectorsTest {
@@ -241,13 +209,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
 ### 11、reducing
 
-reducing方法有三个重载方法，其实是和Stream里的三个reduce方法对应的，二者是可以替换使用的，作用完全一致，也是对流中的元素做统计归纳作用。
-
-
+reducing 方法有三个重载方法，其实是和 Stream 里的三个 reduce 方法对应的，二者是可以替换使用的，作用完全一致，也是对流中的元素做统计归纳作用。
 
 ```java
 public final class Collectors {
@@ -263,8 +227,6 @@ public final class Collectors {
 ```
 
 实例：
-
-
 
 ```java
 public class CollectorsTest {
@@ -283,15 +245,9 @@ public class CollectorsTest {
 }
 ```
 
-
-
-
-
 ### 12、groupingBy
 
-这个方法是用于生成一个拥有分组功能的Collector，它也有三个重载方法：
-
-
+这个方法是用于生成一个拥有分组功能的 Collector，它也有三个重载方法：
 
 ```java
 public final class Collectors {
@@ -311,8 +267,6 @@ public final class Collectors {
 
 实例：
 
-
-
 ```java
 public class CollectorsTest {
     public static void groupingByTest(List<String> list){
@@ -330,23 +284,19 @@ public class CollectorsTest {
 
 执行结果为：
 
-
-
 ```java
 {3=[123, 456, 789], 4=[1101], 5=[asdaa], 6=[3e3e3e], 7=[2321eew], 9=[212121121]}
 {3=[123, 456, 789], 4=[1101], 5=[asdaa], 6=[3e3e3e], 7=[2321eew], 9=[212121121]}
 {3=[123, 456, 789], 4=[1101], 5=[asdaa], 6=[3e3e3e], 7=[2321eew], 9=[212121121]}
 ```
 
-groupingBy方法还有并发版的groupingByConcurrent，功能基本一致，只是返回的Collector是并行的。
+groupingBy 方法还有并发版的 groupingByConcurrent，功能基本一致，只是返回的 Collector 是并行的。
 
 ### 13、partitioningBy
 
-该方法将流中的元素按照给定的校验规则的结果分为两个部分，放到一个map中返回，map的键是Boolean类型，值为元素的列表List。
+该方法将流中的元素按照给定的校验规则的结果分为两个部分，放到一个 map 中返回，map 的键是 Boolean 类型，值为元素的列表 List。
 
 该方法有两个重载方法：
-
-
 
 ```java
 public final class Collectors {
@@ -361,8 +311,6 @@ public final class Collectors {
 ```
 
 实例：
-
-
 
 ```java
 public class CollectorsTest {
@@ -380,8 +328,6 @@ public class CollectorsTest {
 
 执行结果：
 
-
-
 ```
 {false=[123, 456, 789, 1101, asdaa], true=[212121121, 3e3e3e, 2321eew]}
 {false=[123, 456, 1101, 789, 3e3e3e, asdaa], true=[212121121, 2321eew]}
@@ -389,9 +335,7 @@ public class CollectorsTest {
 
 ### 14、toMap
 
-toMap方法是根据给定的键生成器和值生成器生成的键和值保存到一个map中返回，键和值的生成都依赖于元素，可以指定出现重复键时的处理方案和保存结果的map。
-
-
+toMap 方法是根据给定的键生成器和值生成器生成的键和值保存到一个 map 中返回，键和值的生成都依赖于元素，可以指定出现重复键时的处理方案和保存结果的 map。
 
 ```java
 public final class Collectors {
@@ -415,8 +359,6 @@ public final class Collectors {
 
 实例：
 
-
-
 ```java
 public class CollectorsTest {
     public static void toMapTest(List<String> list){
@@ -434,25 +376,21 @@ public class CollectorsTest {
 
 执行结果：
 
-
-
 ```
 {1=123, 4=456, 7=789}
 {a=asdaa, 1=1101, 2=2321eew, 3=3e3e3e, 4=456, 7=789}
 {a=asdaa, 1=1101, 2=2321eew, 3=3e3e3e, 4=456, 7=789}
 ```
 
-第一种方式中，如果不添加limit限制，就会抛出异常。
+第一种方式中，如果不添加 limit 限制，就会抛出异常。
 
-还有并发的版本：toConcurrentMap,同样三种重载方法，与toMap基本一致，只是它最后使用的map是并发Map:ConcurrentHashMap。
+还有并发的版本：toConcurrentMap,同样三种重载方法，与 toMap 基本一致，只是它最后使用的 map 是并发 Map:ConcurrentHashMap。
 
 ### 15、summarizingInt/summarizingLong/summarizingDouble
 
-这三个方法适用于汇总的，返回值分别是IntSummaryStatistics，LongSummaryStatistics，DoubleSummaryStatistics。
+这三个方法适用于汇总的，返回值分别是 IntSummaryStatistics，LongSummaryStatistics，DoubleSummaryStatistics。
 
 在这些返回值中包含有流中元素的指定结果的数量、和、最大值、最小值、平均值。所有仅仅针对数值结果。
-
-
 
 ```java
 public class CollectorsTest {
@@ -470,8 +408,6 @@ public class CollectorsTest {
 ```
 
 执行结果：
-
-
 
 ```
 IntSummaryStatistics{count=8, sum=40, min=3, average=5.000000, max=9}

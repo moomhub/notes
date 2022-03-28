@@ -1,16 +1,16 @@
-# Java环境变量配置
+# Java 环境变量配置
 
-1、新建JAVA_HOME：C:\Program Files\Java\jdk1.8.0_161（jdk安装路径）
+1、新建 JAVA_HOME：C:\Program Files\Java\jdk1.8.0_161（jdk 安装路径）
 
-![img](https://gitee.com/moomhub/img/raw/master/ION9wE6xFDlGiKv.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/ION9wE6xFDlGiKv.png)
 
-2、找到Path，没有的话新建Path：
+2、找到 Path，没有的话新建 Path：
 
 ```
 %JAVA_HOME%\bin;%PATH%
 ```
 
-> 注意：如果是Windows10系统，要写jdk和jre的绝对路径
+> 注意：如果是 Windows10 系统，要写 jdk 和 jre 的绝对路径
 
 Path
 
@@ -18,7 +18,7 @@ Path
 C:\Program Files\Java\jre1.8.0_161\bin;C:\Program Files\Java\jdk1.8.0_161\bin
 ```
 
-![img](https://gitee.com/moomhub/img/raw/master/tXEd3GoeDQnO7fh.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/tXEd3GoeDQnO7fh.png)
 
 3、新建 CLASSPATH：
 
@@ -26,6 +26,6 @@ C:\Program Files\Java\jre1.8.0_161\bin;C:\Program Files\Java\jdk1.8.0_161\bin
 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
 ```
 
- ![img](https://gitee.com/moomhub/img/raw/master/JpyMVsRPuoneZh7.png)
+![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/JpyMVsRPuoneZh7.png)
 
 配置完成。

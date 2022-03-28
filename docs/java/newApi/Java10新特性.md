@@ -89,7 +89,7 @@ CDS 特性在原来的 bootstrap 类基础之上，扩展加入了应用类的 C
 
 表 1.Unicode 扩展表
 
-![image-20220318143129122](https://gitee.com/moomhub/img/raw/master/image-20220318143129122.png)
+![image-20220318143129122](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20220318143129122.png)
 
 如 Java 10 加入的一个方法：
 

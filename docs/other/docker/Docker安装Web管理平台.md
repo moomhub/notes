@@ -1,5 +1,4 @@
-# Docker 安装Web管理平台
-
+# Docker 安装 Web 管理平台
 
 ## 一、拉取相关镜像
 
@@ -12,8 +11,7 @@ docker pull dockerclub/shipyard
 docker images
 ```
 
-
-![](https://gitee.com/moomhub/img/raw/master/1609727399794-88a9447a-0ac3-4e07-9b63-c133b21d8191.png)
+![](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399794-88a9447a-0ac3-4e07-9b63-c133b21d8191.png)
 
 将原先脚本修改为中文脚本
 
@@ -21,14 +19,11 @@ docker images
 wget https://raw.githubusercontent.com/shipyard/shipyard-project.com/master/site/themes/shipyard/static/deploy
 ```
 
-
 > 解决  raw.githubusercontent.com (raw.githubusercontent.com)|0.0.0.0|:443... 失败：拒绝连接。
-
 
 ```PowerShell
 sudo vi /etc/hosts
 ```
-
 
 ```PowerShell
 # GitHub Start
@@ -53,7 +48,6 @@ sudo vi /etc/hosts
 # GitHub End
 ```
 
-
 ## 二、运行脚本
 
 将官方脚本换成修改为中文版的脚本
@@ -63,19 +57,17 @@ grep -n shipyard:latest deploy
 sed -i 's/shipyard\/shipyard:latest/dockerclub\/shipyard:latest/g' deploy
 ```
 
-
-默认会用到8080端口和2375端口
+默认会用到 8080 端口和 2375 端口
 
 如果不想使用这两个端口可以修改
 
-这里我们改成18080与12375端口
+这里我们改成 18080 与 12375 端口
 
 ```纯文本
 vim deploy
 ```
 
-
-![](https://gitee.com/moomhub/img/raw/master/1609727399813-68696108-209c-4b5a-a83c-fc410882da7a.png)
+![](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399813-68696108-209c-4b5a-a83c-fc410882da7a.png)
 
 运行安装脚本
 
@@ -83,31 +75,28 @@ vim deploy
 sh deploy
 ```
 
-
 卸载
 
 ```纯文本
 cat deploy | ACTION=remove bash
 ```
 
-
-![](https://gitee.com/moomhub/img/raw/master/1609727399795-4ef875c4-a34d-446a-bad2-9d583cdc7584.png)
+![](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399795-4ef875c4-a34d-446a-bad2-9d583cdc7584.png)
 
 安装成功 Username: admin Password: shipyard
 
-通过浏览器访问 本机ip:18080
+通过浏览器访问 本机 ip:18080
 
-![](https://gitee.com/moomhub/img/raw/master/1609727399755-4ae946e6-36c2-4d99-8f11-59ef8cbb6bf1.png)
+![](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399755-4ae946e6-36c2-4d99-8f11-59ef8cbb6bf1.png)
 
-![](https://gitee.com/moomhub/img/raw/master/1609727399785-375f27c0-9fd2-44fc-8be8-dbd8d51e4df9.png)
+![](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399785-375f27c0-9fd2-44fc-8be8-dbd8d51e4df9.png)
 
 安装成功
 
-## **三、集群管理** 
+## **三、集群管理**
 
-增加docker集群节点,只需要在节点服务器运行如下语句即可
+增加 docker 集群节点,只需要在节点服务器运行如下语句即可
 
 ```shell
 curl -sSL https://raw.githubusercontent.com/shipyard/shipyard-project.com/master/site/themes/shipyard/static/deploy | ACTION=n
 ```
-

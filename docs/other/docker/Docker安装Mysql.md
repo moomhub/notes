@@ -1,18 +1,18 @@
-# **Docker 安装mysql**
+# **Docker 安装 mysql**
 
-## **下载Mysql镜像**
+## **下载 Mysql 镜像**
 
 **`命令：`docker pull mysql**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101907475-1388871070.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117101907475-1388871070.png)**
 
 **查看镜像**
 
 **`命令：`docker images**
 
-![image-20220318143914640](https://gitee.com/moomhub/img/raw/master/image-20220318143914640.png)**
+![image-20220318143914640](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20220318143914640.png)\*\*
 
-**在opt下创建文件夹**
+**在 opt 下创建文件夹**
 
 ```
 cd /opt/
@@ -21,9 +21,9 @@ cd mysql_docker/
 echo $PWD
 ```
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101933202-1072982636.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117101933202-1072982636.png)**
 
-**5、启动mysql容器，在var/lib/docker/containers/下查看容器**
+**5、启动 mysql 容器，在 var/lib/docker/containers/下查看容器**
 
 **`命令：`**
 
@@ -35,19 +35,17 @@ docker run --name mysql-master -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs
 docker run --name mysql-slave -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d -i -p 3308:3306 mysql:latest
 ```
 
-
-
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117101951542-1388225438.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117101951542-1388225438.png)**
 
 **`命令：`cd /var/lib/docker/containers/**
 
-**6、查看mysql进程**
+**6、查看 mysql 进程**
 
 **`命令：`docker ps -a**
 
-![image-20220318143901289](https://gitee.com/moomhub/img/raw/master/image-20220318143901289.png)**
+![image-20220318143901289](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20220318143901289.png)\*\*
 
-**7、进入mysql容器，并登陆mysql**
+**7、进入 mysql 容器，并登陆 mysql**
 
 **`命令：`**
 
@@ -57,7 +55,7 @@ docker exec -it mysql-master bash
 
 **命令：`mysql -uroot -p**
 
-![image-20220318143837718](https://gitee.com/moomhub/img/raw/master/image-20220318143837718.png)**
+![image-20220318143837718](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/image-20220318143837718.png)\*\*
 
 **8、开启远程访问权限**
 
@@ -66,17 +64,17 @@ docker exec -it mysql-master bash
 **`命令：`ALTER USER 'slave'@'%' IDENTIFIED WITH mysql_native_password BY '123456';**
 **`命令：`flush privileges;**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102022439-1012036839.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117102022439-1012036839.png)**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102030619-917697046.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117102030619-917697046.png)**
 
-**镜像里面 root用户已经有远程连接权限在里面，所以不需要去设置，只是模式不一样才导致无法连接，把root用户的密码改成 mysql_native_password 模式，即可远程连接**
+**镜像里面 root 用户已经有远程连接权限在里面，所以不需要去设置，只是模式不一样才导致无法连接，把 root 用户的密码改成 mysql_native_password 模式，即可远程连接**
 
-## **查看docker日志**
+## **查看 docker 日志**
 
 **`命令：`docker logs -f --tail 10 a4dac74d48f7**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102048856-1273275706.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117102048856-1273275706.png)**
 
 ## **常用命令**
 
@@ -84,33 +82,29 @@ docker exec -it mysql-master bash
 
 **`命令：`docker ps -a**
 
-- **关闭docker中mysql容器**
+- **关闭 docker 中 mysql 容器**
 
 **`命令：`docker stop mysqlserver**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102059917-479100535.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117102059917-479100535.png)**
 
-- **重启docker中mysql重启**
+- **重启 docker 中 mysql 重启**
 
-**![img](https://gitee.com/moomhub/img/raw/master/997646-20200117102109562-1174307222.png)**
+**![img](https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/997646-20200117102109562-1174307222.png)**
 
-- **重启docker**
+- **重启 docker**
 
 **`命令：`systemctl restart docker**
 
-- **关闭docker**
+- **关闭 docker**
 
 **`命令：`systemctl stop docker**
-
-
-
-
 
 ## Mysql 主从分离（Docker）
 
 ### 创建配置文件
 
-默认docker数据目录：/opt/docker/mysql/  
+默认 docker 数据目录：/opt/docker/mysql/
 
 主数据库（master）配置文件/usr/local/mysql/master/conf/my.cnf:
 
@@ -132,7 +126,7 @@ server-id=2   #注意这个id>0且要唯一
 
 ### Master 主库
 
-创建Master 主库
+创建 Master 主库
 
 docker 运行 挂载相关文件
 
@@ -148,7 +142,7 @@ docker run --name mysql-master  \
 -d -i -p 3307:3306 mysql:latest
 ```
 
-Master主库设置
+Master 主库设置
 
 ```shell
 #进入主库
@@ -158,7 +152,7 @@ mysql -u root -p
 
 ```
 
-创建MySQL从库用户
+创建 MySQL 从库用户
 
 ```
 > 172.17.0.10 为从库在docker 中的IP
@@ -178,18 +172,18 @@ FLUSH PRIVILEGES;
 SHOW MASTER STATUS;
 ```
 
-> 从库连接到主库时 报错：---->mysql Authentication plugin 'caching_sha2_password' is not supported问题处理        
+> 从库连接到主库时 报错：---->mysql Authentication plugin 'caching_sha2_password' is not supported 问题处理
 >
-> 使用mysql8.0版本，登录失败，提示 Authentication plugin 'caching_sha2_password' is not supported。
-> 原因是在MySQL 8.0以后，默认的密码加密方式是caching_sha2_password而不是mysql_native_password。
+> 使用 mysql8.0 版本，登录失败，提示 Authentication plugin 'caching_sha2_password' is not supported。
+> 原因是在 MySQL 8.0 以后，默认的密码加密方式是 caching_sha2_password 而不是 mysql_native_password。
 >
 > 解决方法：
 >
 > 2.更新身份认证方式 ALTER USER '你的用户名' IDENTIFIED WITH mysql_native_password BY '你的用户密码';
 
-### Slave主库
+### Slave 主库
 
-创建Slave主库
+创建 Slave 主库
 
 Docker 运行 挂载相关文件
 
@@ -205,7 +199,7 @@ docker run --name mysql-slave  \
 -d -i -p 3308:3306 mysql:latest
 ```
 
-Slave从库设置
+Slave 从库设置
 
 ```shell
 #进入主库
@@ -214,9 +208,9 @@ docker exec -it mysql-slave bash
 mysql -u root -p
 ```
 
-Mysql Slave从库设置
+Mysql Slave 从库设置
 
-> 172.17.0.9  ----  主库IP
+> 172.17.0.9 ---- 主库 IP
 > slave ----- 用户名
 > slave123 ----- 密码
 > mysql-bin.000003 -----主库信息
@@ -242,7 +236,6 @@ MASTER_LOG_POS=892;
 
 成功后
 
-
 Master Slave 常见配置
 
 ```bash
@@ -260,16 +253,15 @@ binlog-do-db=testOrderDb    #需要同步的数据库
 
 ### 从库设置为只读
 
-mysql主从复制，slave从库只读配置对于需要保证master-slave主从同步的salve库，如果要设置为只读状态，需要执行的命令为：
+mysql 主从复制，slave 从库只读配置对于需要保证 master-slave 主从同步的 salve 库，如果要设置为只读状态，需要执行的命令为：
 
 ```
 set global read_only=1;  对于非root用户，切换到root用户后还是可以进行增删改查的哦。
 ```
 
+read_only=1 只读模式，可以限定普通用户进行数据修改的操作，但不会限定具有 super 权限的用户（如超级管理员 root 用户）的数据修改操作。
 
- read_only=1只读模式，可以限定普通用户进行数据修改的操作，但不会限定具有super权限的用户（如超级管理员root用户）的数据修改操作。
-
-### Docker 里面MySql 默认的配置信息
+### Docker 里面 MySql 默认的配置信息
 
 ```mysql
 # docker 里面默认的配置信息
@@ -291,7 +283,7 @@ secure-file-priv= NULL
 docker cp mysql-master:/etc/mysql/my.cnf /opt/a
 ```
 
-## 设置docker开机自启动如下：
+## 设置 docker 开机自启动如下：
 
 ```
 systemctl enable docker
