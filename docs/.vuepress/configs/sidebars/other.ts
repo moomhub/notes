@@ -39,6 +39,8 @@ const mix = [
     collapsible: false,
     children: [
       "/other/mix/PigGo+图床.md",
+      "/other/mix/Windows使用WSL2.md",
+      "/other/mix/WSL2使用文档.md",
     ],
   }
 ];
