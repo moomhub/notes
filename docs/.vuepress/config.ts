@@ -2,7 +2,6 @@ import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "@vuepress/theme-default";
 import { path } from "@vuepress/utils";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
-// import { copyCodePlugin } from "vuepress-plugin-copy-code2";
 import { sidebars, navbar } from "./configs";
 const { prismjsPlugin } = require("@vuepress/plugin-prismjs");
 
@@ -119,14 +118,6 @@ export default defineUserConfig({
         },
       },
     }),
-    prismjsPlugin(),
-    // copyCodePlugin({
-    //   locales: {
-    //     "/": {
-    //       hint: "点击复制",
-    //       copy: "复制成功"
-    //     },
-    //   },
-    // }),
+    prismjsPlugin()
   ],
 });
