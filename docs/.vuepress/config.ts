@@ -2,7 +2,7 @@ import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "@vuepress/theme-default";
 import { path } from "@vuepress/utils";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
-import { clipboardPlugin } from "vuepress-plugin-clipboard";
+import { copyCodePlugin } from "vuepress-plugin-copy-code2";
 import { sidebars, navbar } from "./configs";
 const { prismjsPlugin } = require("@vuepress/plugin-prismjs");
 
@@ -73,7 +73,7 @@ export default defineUserConfig({
       apiKey: "8644a38510392fdc7e0aabb51371cebd",
       indexName: "moomhub",
       searchParameters: {
-        facetFilters: ['tags:v2'],
+        facetFilters: ["tags:v2"],
       },
       locales: {
         "/": {
@@ -119,11 +119,14 @@ export default defineUserConfig({
         },
       },
     }),
-    prismjsPlugin({}),
-    clipboardPlugin({
-      align: "top",
-      staticIcon: true,
-      successText: "复制成功！",
+    prismjsPlugin(),
+    copyCodePlugin({
+      locales: {
+        "/": {
+          hint: "点击复制",
+          copy: "复制成功"
+        },
+      },
     }),
   ],
 });
