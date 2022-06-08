@@ -8,6 +8,7 @@ const springboot = [
       "/backend/springboot/错误处理.md",
       "/backend/springboot/SpringBoot使用Log4j2日志框架.md",
       "/backend/springboot/SpringBoot拦截器.md",
+      "/backend/springboot/Spring Boot 使用 Junit5测试.md"
     ],
   },
   {

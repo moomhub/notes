@@ -28,6 +28,7 @@ export default defineUserConfig<DefaultThemeOptions>({
       navbar.back_end,
       navbar.database,
       navbar.other,
+      navbar.web,
     ],
     sidebar: sidebars.all,
     editLinkText: "在 GitHub 上编辑此页",
