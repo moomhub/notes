@@ -1,7 +1,6 @@
 import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "@vuepress/theme-default";
 import { path } from "@vuepress/utils";
-import type { ClipboardOptions } from "vuepress-plugin-clipboard";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import { clipboardPlugin } from "vuepress-plugin-clipboard";
 import { sidebars, navbar } from "./configs";
