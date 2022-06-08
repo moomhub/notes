@@ -1,0 +1,1 @@
+const t={key:"v-5f7e17a4",path:"/other/linux/Linux%E9%97%AE%E9%A2%98%E5%BD%92%E6%A1%A3.html",title:"Linux \u95EE\u9898\u5F52\u6863",lang:"en-Zh",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1647588059e3,contributors:[{name:"MoomHub",email:"2208300539@qq.com",commits:2}]},filePathRelative:"other/linux/Linux\u95EE\u9898\u5F52\u6863.md"};export{t as data};

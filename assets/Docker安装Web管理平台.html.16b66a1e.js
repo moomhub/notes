@@ -1,0 +1,35 @@
+import{_ as e,o as s,c as i,a}from"./app.4a9c1875.js";const n={},d=a(`<h1 id="docker-\u5B89\u88C5-web-\u7BA1\u7406\u5E73\u53F0" tabindex="-1"><a class="header-anchor" href="#docker-\u5B89\u88C5-web-\u7BA1\u7406\u5E73\u53F0" aria-hidden="true">#</a> Docker \u5B89\u88C5 Web \u7BA1\u7406\u5E73\u53F0</h1><h2 id="\u4E00\u3001\u62C9\u53D6\u76F8\u5173\u955C\u50CF" tabindex="-1"><a class="header-anchor" href="#\u4E00\u3001\u62C9\u53D6\u76F8\u5173\u955C\u50CF" aria-hidden="true">#</a> \u4E00\u3001\u62C9\u53D6\u76F8\u5173\u955C\u50CF</h2><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>docker pull rethinkdb
+docker pull microbox/etcd
+docker pull shipyard/docker-proxy
+docker pull swarm
+docker pull dockerclub/shipyard
+docker images
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><img src="https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399794-88a9447a-0ac3-4e07-9b63-c133b21d8191.png" alt=""></p><p>\u5C06\u539F\u5148\u811A\u672C\u4FEE\u6539\u4E3A\u4E2D\u6587\u811A\u672C</p><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>wget https://raw.githubusercontent.com/shipyard/shipyard-project.com/master/site/themes/shipyard/static/deploy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>\u89E3\u51B3 \xA0raw.githubusercontent.com (raw.githubusercontent.com)|0.0.0.0|:443... \u5931\u8D25\uFF1A\u62D2\u7EDD\u8FDE\u63A5\u3002</p></blockquote><div class="language-PowerShell ext-PowerShell line-numbers-mode"><pre class="language-PowerShell"><code>sudo vi /etc/hosts
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-PowerShell ext-PowerShell line-numbers-mode"><pre class="language-PowerShell"><code># GitHub Start
+52.74.223.119     github.com
+192.30.253.119    gist.github.com
+54.169.195.247    api.github.com
+185.199.111.153   assets-cdn.github.com
+151.101.76.133    raw.githubusercontent.com
+151.101.108.133   user-images.githubusercontent.com
+151.101.76.133    gist.githubusercontent.com
+151.101.76.133    cloud.githubusercontent.com
+151.101.76.133    camo.githubusercontent.com
+151.101.76.133    avatars0.githubusercontent.com
+151.101.76.133    avatars1.githubusercontent.com
+151.101.76.133    avatars2.githubusercontent.com
+151.101.76.133    avatars3.githubusercontent.com
+151.101.76.133    avatars4.githubusercontent.com
+151.101.76.133    avatars5.githubusercontent.com
+151.101.76.133    avatars6.githubusercontent.com
+151.101.76.133    avatars7.githubusercontent.com
+151.101.76.133    avatars8.githubusercontent.com
+# GitHub End
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="\u4E8C\u3001\u8FD0\u884C\u811A\u672C" tabindex="-1"><a class="header-anchor" href="#\u4E8C\u3001\u8FD0\u884C\u811A\u672C" aria-hidden="true">#</a> \u4E8C\u3001\u8FD0\u884C\u811A\u672C</h2><p>\u5C06\u5B98\u65B9\u811A\u672C\u6362\u6210\u4FEE\u6539\u4E3A\u4E2D\u6587\u7248\u7684\u811A\u672C</p><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>grep -n shipyard:latest deploy
+sed -i &#39;s/shipyard\\/shipyard:latest/dockerclub\\/shipyard:latest/g&#39; deploy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>\u9ED8\u8BA4\u4F1A\u7528\u5230 8080 \u7AEF\u53E3\u548C 2375 \u7AEF\u53E3</p><p>\u5982\u679C\u4E0D\u60F3\u4F7F\u7528\u8FD9\u4E24\u4E2A\u7AEF\u53E3\u53EF\u4EE5\u4FEE\u6539</p><p>\u8FD9\u91CC\u6211\u4EEC\u6539\u6210 18080 \u4E0E 12375 \u7AEF\u53E3</p><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>vim deploy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><img src="https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399813-68696108-209c-4b5a-a83c-fc410882da7a.png" alt=""></p><p>\u8FD0\u884C\u5B89\u88C5\u811A\u672C</p><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>sh deploy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>\u5378\u8F7D</p><div class="language-\u7EAF\u6587\u672C ext-\u7EAF\u6587\u672C line-numbers-mode"><pre class="language-\u7EAF\u6587\u672C"><code>cat deploy | ACTION=remove bash
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><img src="https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399795-4ef875c4-a34d-446a-bad2-9d583cdc7584.png" alt=""></p><p>\u5B89\u88C5\u6210\u529F Username: admin Password: shipyard</p><p>\u901A\u8FC7\u6D4F\u89C8\u5668\u8BBF\u95EE \u672C\u673A ip:18080</p><p><img src="https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399755-4ae946e6-36c2-4d99-8f11-59ef8cbb6bf1.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/moomhub/notes_images01/images/1609727399785-375f27c0-9fd2-44fc-8be8-dbd8d51e4df9.png" alt=""></p><p>\u5B89\u88C5\u6210\u529F</p><h2 id="\u4E09\u3001\u96C6\u7FA4\u7BA1\u7406" tabindex="-1"><a class="header-anchor" href="#\u4E09\u3001\u96C6\u7FA4\u7BA1\u7406" aria-hidden="true">#</a> <strong>\u4E09\u3001\u96C6\u7FA4\u7BA1\u7406</strong></h2><p>\u589E\u52A0 docker \u96C6\u7FA4\u8282\u70B9,\u53EA\u9700\u8981\u5728\u8282\u70B9\u670D\u52A1\u5668\u8FD0\u884C\u5982\u4E0B\u8BED\u53E5\u5373\u53EF</p><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">curl</span> -sSL https://raw.githubusercontent.com/shipyard/shipyard-project.com/master/site/themes/shipyard/static/deploy <span class="token operator">|</span> <span class="token assign-left variable">ACTION</span><span class="token operator">=</span>n
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>`,30),r=[d];function c(l,t){return s(),i("div",null,r)}var u=e(n,[["render",c],["__file","Docker\u5B89\u88C5Web\u7BA1\u7406\u5E73\u53F0.html.vue"]]);export{u as default};
